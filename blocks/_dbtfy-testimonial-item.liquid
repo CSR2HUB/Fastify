@@ -1,0 +1,313 @@
+{% liquid
+  assign display_type = section.settings.display_type
+
+  case section.settings.date_format
+    when '1'
+      assign date_format = '%d-%m-%Y'
+
+    when '2'
+      assign date_format = '%m-%d-%Y'
+
+    when '3'
+      assign date_format = '%d-%m-%y'
+
+    when '4'
+      assign date_format = '%m-%d-%y'
+  endcase
+%}
+
+<li
+  id="Slide-{{ block.id }}"
+  {% if display_type == 'carousel' or display_type == 'rotator' or display_type == 'story' %}
+    class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} dbtfy-testimonial-item__{{ display_type }}"
+  {% else %}
+    class="grid__item dbtfy-testimonial-item dbtfy-testimonial-item__{{ display_type }}"
+  {% endif %}
+  {{ block.shopify_attributes }}
+>
+  <div class="dbtfy-testimonial-card {{ section.settings.media_position }}" {{ block.shopify_attributes }}>
+    {% if display_type == 'cards' or display_type == 'story' %}
+      {% liquid
+        assign video = block.settings.video
+        assign image = block.settings.image
+        assign video_link = block.settings.video_link
+        assign muted = 0
+        if block.settings.enalbe_mute
+          assign muted = 1
+        endif
+
+        assign video_id = video.id | default: video_link.id
+        assign video_alt = video.alt
+        assign alt = 'sections.video.load_video' | t: description: video_alt | escape
+        assign poster = video.preview_image | default: image
+      %}
+      <div class="dbtfy-testimonial__media">
+        {% if video != blank or video_link != blank %}
+          <deferred-media
+            class="dbtfy-testimonial-media deferred-media gradient global-media-settings video-section__media media-fit-cover media"
+            style="--ratio-percent: 100%"
+            data-media-id="{{ video_id }}"
+          >
+            {% if block.settings.enable_autoplay %}
+              {%- if video == null and video_link != null -%}
+                {%- if video_link.type == 'youtube' -%}
+                  <iframe
+                    src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1&mute={{ muted }}&loop=1&playlist={{ video_id }}"
+                    class="js-youtube"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen
+                    title="{{ alt | escape }}"
+                  ></iframe>
+                {%- else -%}
+                  <iframe
+                    src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1&mute={{ muted }}&loop=1&playlist={{ video_id }}"
+                    class="js-vimeo"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen
+                    title="{{ alt | escape }}"
+                  ></iframe>
+                {%- endif -%}
+              {%- else -%}
+                {{ video | video_tag: image_size: '1100x', autoplay: true, loop: true, controls: false, muted: true }}
+              {% endif %}
+            {% else %}
+              <button
+                id="Deferred-Poster-Modal-{{ video_id }}"
+                class="video-section__poster media deferred-media__poster media--landscape"
+                type="button"
+                aria-label="{{ alt }}"
+              >
+                {%- if poster != null -%}
+                  {% render 'dbtfy-img', img: poster, lazy: 'lazy' %}
+                {%- else -%}
+                  {{- 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' -}}
+                {%- endif -%}
+                <span class="deferred-media__poster-button motion-reduce">
+                  <span class="svg-wrapper">
+                    {{- 'icon-play.svg' | inline_asset_content -}}
+                  </span>
+                </span>
+              </button>
+              <template>
+                {%- if video == null and video_link != null -%}
+                  {%- if video_link.type == 'youtube' -%}
+                    <iframe
+                      src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1&mute={{ muted }}&loop=1&playlist={{ video_id }}"
+                      class="js-youtube"
+                      allow="autoplay; encrypted-media"
+                      allowfullscreen
+                      title="{{ alt | escape }}"
+                    ></iframe>
+                  {%- else -%}
+                    <iframe
+                      src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1&mute={{ muted }}&loop=1&playlist={{ video_id }}"
+                      class="js-vimeo"
+                      allow="autoplay; encrypted-media"
+                      allowfullscreen
+                      title="{{ alt | escape }}"
+                    ></iframe>
+                  {%- endif -%}
+                {%- else -%}
+                  {{
+                    video
+                    | video_tag: image_size: '1100x', autoplay: true, loop: true, controls: false, muted: false
+                  }}
+                {% endif %}
+              </template>
+            {% endif %}
+          </deferred-media>
+        {% elsif image != blank %}
+          <div
+            class="dbtfy-testimonial-media global-media-settings background-transparent media"
+            style="aspect-ratio: 1"
+          >
+            {% render 'dbtfy-img', img: image, lazy: 'lazy' %}
+          </div>
+        {% else %}
+          <div
+            class="dbtfy-testimonial-media global-media-settings background-transparent placeholder"
+            style="aspect-ratio: 1"
+          >
+            {{- 'image' | placeholder_svg_tag: 'placeholder-svg' -}}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+    <div class="dbtfy-tesimonial__body">
+      {% if section.settings.enable_quotation_icon %}
+        <div class="dbtfy-tesimonial__icon {{ section.settings.icon_position }} {{ section.settings.icon_height }} {{ section.settings.icon_height_mobile }}--mobile">
+          {% if section.settings.custom_icon != blank %}
+            <div class="media media--transparent">
+              {% render 'dbtfy-img', img: section.settings.custom_icon %}
+            </div>
+          {% else %}
+            {% render 'material-icon', icon: section.settings.icon %}
+          {% endif %}
+        </div>
+      {% endif %}
+      {% capture testimonial_profile %}
+        <div class="dbtfy-tesimonial__profile dbtfy-tesimonial__profile--{{ section.settings.profile_content_alignment }}">
+            <div class="dbtfy-tesimonial__profile-content">
+                {% if section.settings.enable_author_name and block.settings.author != blank %}
+                    <h3 class="inline-richtext">{{ block.settings.author }}</h3>
+                {% endif %}
+                {% if section.settings.enable_compay_profession and block.settings.profession != blank %}
+                    <p class="inline-richtext subtitle">
+                        {{ block.settings.profession }}
+                    </p>
+                {% endif %}
+                {%- if section.settings.enable_date and block.settings.date != blank -%}
+                  {{- block.settings.date | time_tag: date_format -}}
+                {%- endif -%}
+            </div>
+            {% if section.settings.enable_author_image %}
+              <div class="dbtfy-tesimonial__profile-avatar">
+                  {% liquid
+                      if section.settings.enable_default_avatar and section.settings.default_avatar != blank
+                          assign avatar = section.settings.default_avatar
+                      endif
+                      if block.settings.author_image != blank
+                          assign avatar = block.settings.author_image
+                      endif
+                  %}
+                  <div class="media media--{{ section.settings.profile_picture_style }} {% if avatar == blank %}placeholder{% endif %}">
+                      {% if avatar != blank %}
+                          {% render 'dbtfy-img', img: avatar, lazy: 'lazy' %}
+                      {% else %}
+                          {{- 'image' | placeholder_svg_tag: 'placeholder-svg' -}}
+                      {% endif %}
+                  </div>
+              </div>
+            {% endif %}
+        </div>
+      {% endcapture %}
+      {% if section.settings.user_data_location == 'above' %}
+        {{ testimonial_profile }}
+      {% endif %}
+      <div class="dbtfy-testimonial__text {{ section.settings.review_content_aignment }}">
+        {% if section.settings.enable_star_rating %}
+          <div class="dbtfy-tesimonial__review">
+            {% for i in (1..5) %}
+              {% if i > block.settings.star_rating %}
+                {% render 'icon-empty-star' %}
+              {% else %}
+                {% render 'icon-star' %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+        {% if section.settings.enable_paragraph and block.settings.text != blank %}
+          <dbtfy-rte class="dbtfy-tesimonial__rte">
+            <div class="{% if section.settings.enable_read_more_shadow %}dbtfy-testimonials-shadow {% endif %} short-description rte {% unless section.settings.enable_read_more %}show-full{% endunless %}">
+              {{ block.settings.text }}
+            </div>
+            {% if section.settings.enable_read_more %}
+              {% assign button_size = section.settings.button_size %}
+              {% if button_size == 'inherit' %}
+                {% assign button_size = settings.button_size %}
+              {% endif %}
+              <button
+                class="{{ section.settings.button_style }} rte-toggle-button {{ button_size }}"
+              >
+                <span class="read-more-text button-show">{{ section.settings.read_more_label }}</span>
+                <span class="read-less-text hidden button-show">{{ section.settings.read_less_label }}</span>
+              </button>
+            {% endif %}
+          </dbtfy-rte>
+        {% endif %}
+      </div>
+      {% if section.settings.user_data_location == 'below' %}
+        {{ testimonial_profile }}
+      {% endif %}
+    </div>
+  </div>
+</li>
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy_testimonials.blocks.testimonial.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "range",
+      "id": "star_rating",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.star_rating.label",
+      "default": 5,
+      "min": 1,
+      "max": 5,
+      "step": 1
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.image.label"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.video.label",
+      "info": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.video.info"
+    },
+    {
+      "type": "video_url",
+      "id": "video_link",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.video_link.label",
+      "accept": ["youtube", "vimeo"],
+      "info": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.video_link.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.enable_autoplay.label",
+      "default": false,
+      "info": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.enable_autoplay.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enalbe_mute",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.enalbe_mute.label",
+      "default": false,
+      "info": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.enalbe_mute.info"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:general.settings.text",
+      "default": "<p>Share blog posts, products, or promotions with your customers. Use this text to describe products, share details on availability and style, or as a space to display recent reviews or FAQs.</p>"
+    },
+    {
+      "type": "text",
+      "id": "date",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.date.label",
+      "info": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.date.info"
+    },
+    {
+      "type": "text",
+      "id": "profession",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.profession.label",
+      "default": "Profession"
+    },
+    {
+      "type": "image_picker",
+      "id": "author_image",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.author_image.label"
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.author.label",
+      "default": "Author's name"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.dbtfy_testimonials.blocks.testimonial.settings.link.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy_testimonials.blocks.testimonial.name"
+    }
+  ]
+}
+{% endschema %}

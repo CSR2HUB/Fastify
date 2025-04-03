@@ -1,0 +1,132 @@
+{% liquid
+  assign slider_on = 'slider slider--everywhere'
+
+  capture slider_parameters
+    echo ' data-autoplay="' | append: block.settings.enable_autoplay | append: '"'
+    echo ' data-speed="' | append: block.settings.autoplay_speed | append: '"'
+    echo ' data-loop="' | append: block.settings.enable_loop | append: '"'
+    echo ' data-arrows="' | append: block.settings.enable_arrows | append: '"'
+  endcapture
+
+  assign block_id = 'announcement-bar-' | append: block.id
+
+  render 'custom-arrow-style', as_a: 'block', id: block_id
+%}
+
+<dbtfy-slider-component
+  {{ slider_parameters }}
+  class="announcement-bar"
+  role="region"
+  aria-roledescription="{{ 'sections.announcements.carousel' | t }}"
+  aria-label="{{ 'sections.announcements.announcement_bar' | t }}"
+  id="{{ block_id }}"
+>
+  <style>
+    {% if block.settings.enable_small_text_on_mobile %}
+      @media (max-width: 749px) {
+        .announcement-bar__message {
+          font-size: calc(var(--font-heading-scale) * 1rem);
+          line-height: inherit;
+        }
+      }
+    {% endif %}
+  </style>
+  <div class="announcement-bar-slider">
+    <div
+      class="grid grid--1-col {{ slider_on }}"
+      id="Slider-{{ section.id }}"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      {% content_for 'blocks' %}
+    </div>
+    {% render 'dbtfy-arrow', class: 'slideshow__controls slideshow__controls--top' %}
+  </div>
+</dbtfy-slider-component>
+
+{% schema %}
+{
+  "name": "t:sections.announcement-bar.blocks.announcement.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_small_text_on_mobile",
+      "label": "t:sections.announcement-bar.settings.small_text_mobile.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.slider.slider_settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "default": false,
+      "label": "t:general.settings.slider.enable_autoplay"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "t:general.settings.slider.autoplay_speed",
+      "default": 5,
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "default": true,
+      "label": "Loop",
+      "info": "Continue from the last slide to the first slide"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_arrows",
+      "default": true,
+      "label": "t:general.settings.slider.show_arrows"
+    },
+    {
+      "type": "select",
+      "id": "arrow_color",
+      "default": "inherit",
+      "label": "t:general.settings.slider.arrow_color",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_color",
+      "label": "t:general.settings.slider.custom-arrow-color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_background_color",
+      "label": "t:general.settings.slider.custom-arrow-bg-color",
+      "default": "#7559ff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_announcement-bar-message-block"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.announcement-bar.blocks.announcement.name",
+      "blocks": [{ "type": "_announcement-bar-message-block" }]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,171 @@
+{% if request.design_mode or settings.dbtfy_separator %}
+  {% render 'widget-blocker',
+    enabled: settings.dbtfy_separator,
+    section: section,
+    name: 'Separator',
+    type: '⚡ Paid Sections'
+  %}
+  {% render 'section-padding', section: section %}
+
+  <dbtfy-separator>
+    <div class="section-{{ section.id }}-padding {{ section.settings.container_size }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} show-on--{{ section.settings.show_on }}">
+      <hr
+        style="opacity: {{ section.settings.opacity | append: '%' }};background-color:{{ section.settings.color }};"
+        class="m-0"
+      >
+    </div>
+  </dbtfy-separator>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Separator",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "default": "both",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "container_size",
+      "label": "t:sections.all.container_size.label",
+      "default": "page-width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:sections.all.button.options__2.label"
+        },
+        {
+          "value": "",
+          "label": "t:sections.all.container_size.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "opacity",
+      "label": "t:settings_schema.global.settings.opacity.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:sections.header.settings.header__1.content"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding_section.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:sections.all.padding_section.padding.padding_top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:sections.all.padding_section.padding.padding_bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Separator"
+    }
+  ]
+}
+{% endschema %}

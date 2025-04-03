@@ -1,0 +1,13 @@
+<section-copy
+  class="dbtfy-section-copy"
+  data-text="{{ 'general.section.section_id' | t }}"
+  data-copy-text="{{ 'general.section.copied_id' | t }}"
+>
+  <a href="#shopify-section-{{ section.id }}">
+    {{ 'general.section.section_id' | t }}
+  </a>
+</section-copy>
+
+{{ 'dbtfy-section-copy.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'dbtfy-section-copy.js' | asset_url }}" defer="defer"></script>

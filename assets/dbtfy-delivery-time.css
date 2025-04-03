@@ -1,0 +1,72 @@
+.dbtfy-delivery-time small {
+  font-weight: 600;
+}
+
+.dbtfy-cart-delivery-time-block {
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  width: 100%;
+  padding: 1rem;
+  border-radius: var(--text-boxes-radius);
+}
+.dbtfy-delivery-time [data-vc='time'] {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dbtfy-delivery-time [data-vc-time-input='hour'] input,
+.dbtfy-delivery-time [data-vc-time-input='minute'] input {
+  font-size: 18px;
+}
+
+.dbtfy-delivery-time [data-vc-time-input='hour'],
+.dbtfy-delivery-time [data-vc-time-input='minute'] {
+  width: 30px;
+}
+
+.dbtfy-delivery-time [data-vc-time='keeping'] {
+  font-size: 14px;
+}
+
+.dbtfy-delivery-time [data-vc-time-range] input {
+  height: 2rem;
+}
+
+/* Style for the thumb (the draggable part) */
+.dbtfy-delivery-time .vc-time__range input::-webkit-slider-thumb {
+  background-color: rgb(var(--color-background));
+  height: 18px; /* Height of the thumb */
+  border: 1px solid;
+}
+
+.dbtfy-delivery-time .vc-time__range input::-moz-range-thumb {
+  height: 18px; /* Height of the thumb */
+}
+
+/* Optional: Style for the track */
+.dbtfy-delivery-time .vc-time__range input::-webkit-slider-runnable-track {
+  background-color: rgba(var(--color-foreground),0.7);
+  height: 7px;
+}
+
+.dbtfy-delivery-time .vc-time__range input::-moz-range-track {
+  height: 7px;
+}
+
+.dbtfy-delivery-time [data-vc-theme='light'].vc {
+  background-color: rgba(var(--color-background));
+}
+
+.dbtfy-delivery-time [data-vc-theme='light'] .vc-time__hour input,
+.dbtfy-delivery-time [data-vc-theme='light'] .vc-time__minute input,
+.dbtfy-delivery-time [data-vc-theme='light'] .vc-time__keeping,
+.dbtfy-delivery-time [data-vc-theme='light'] .vc-time__range input,
+.dbtfy-delivery-time [data-vc-theme='light'] .vc-time__hour:after {
+  color: rgb(var(--color-foreground));
+  background-color: transparent;
+}
+
+.dbtfy-delivery-time [data-vc-theme='light'] .vc-time__range:after,
+.dbtfy-delivery-time [data-vc-theme='light'] .vc-time__range:before {
+  background-color: rgb(var(--color-foreground));
+}

@@ -1,0 +1,10 @@
+dbtfy-infinite-scroll {
+  margin-top: var(--grid-desktop-vertical-spacing);
+  display: block;
+}
+
+.dbtfy-infinite-scroll img {
+  object-fit: cover;
+  vertical-align: middle;
+  width: fit-content;
+}

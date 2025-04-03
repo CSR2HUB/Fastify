@@ -1,0 +1,264 @@
+{% render 'widget-blocker',
+  enabled: settings.dbtfy_contact_form_builder,
+  section: section,
+  name: 'Contact form builder',
+  type: '⚡ Paid Sections'
+%}
+{% if request.design_mode or settings.dbtfy_contact_form_builder %}
+  {{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+  {{ 'dbtfy-contact-form-builder.css' | asset_url | stylesheet_tag }}
+
+  {% render 'section-padding', section: section %}
+
+  <dbtfy-contact-form-builder>
+    <div
+      class="color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient"
+      id="section-{{ section.id }}"
+    >
+      <div
+        class="dbtfy-contact-form-builder contact page-width page-width--narrow section-{{ section.id }}-padding"
+        style="max-width: {{ section.settings.max_width }}rem;"
+      >
+        <div class="dbtfy-contact-form-builder-header">
+          {% content_for 'block', type: '_heading', id: 'heading' %}
+        </div>
+        {%- liquid
+          assign contact_form_class = ''
+          if settings.animations_reveal_on_scroll
+            assign contact_form_class = 'scroll-trigger animate--slide-in'
+          endif
+        -%}
+        <dbtfy-form-validator
+          data-one-email-error="{{ 'templates.contact.form.one_email_error' | t }}"
+          data-email-error="{{ 'templates.contact.form.email_error' | t }}"
+        >
+          {%- form 'contact', id: 'ContactFormBuilder', class: contact_form_class -%}
+            {%- if form.posted_successfully? -%}
+              <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
+                {% render 'material-icon', icon: 'Check Circle' %}
+
+                {{ 'templates.contact.form.post_success' | t }}
+              </h2>
+            {%- elsif form.errors -%}
+              <div class="form__message">
+                <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+                  {% render 'material-icon', icon: 'Error' %}
+
+                  {{ 'templates.contact.form.error_heading' | t }}
+                </h2>
+              </div>
+              <ul class="form-status-list caption-large" role="list">
+                <li>
+                  <a href="#ContactFormBuilder-email" class="link">
+                    {{ form.errors.translated_fields.email | capitalize }}
+                    {{ form.errors.messages.email }}
+                  </a>
+                </li>
+              </ul>
+            {%- endif -%}
+            <div class="form__error-message form__message hidden">
+              <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+                {{- 'icon-error.svg' | inline_asset_content -}}
+                <span class="error"></span>
+              </h2>
+            </div>
+
+            {% content_for 'block', type: '_dbtfy-cf-builder', id: 'dbtfy-cf-builder' %}
+          {%- endform -%}
+        </dbtfy-form-validator>
+      </div>
+    </div>
+  </dbtfy-contact-form-builder>
+
+  <script src="{{ 'dbtfy-contact-form-dropdown.js' | asset_url }}" defer></script>
+  <script src="{{ 'dbtfy-form-validator.js' | asset_url }}" defer></script>
+{% endif %}
+{% schema %}
+{
+  "name": "t:sections.dbtfy-contact-form-builder.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.all.color_schemes.default.options__3.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "t:sections.dbtfy-contact-form-builder.settings.max_width.label",
+      "default": 60,
+      "min": 40,
+      "max": 100,
+      "unit": "rem"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding_section.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:sections.all.padding_section.padding.padding_top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:sections.all.padding_section.padding.padding_bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-contact-form-builder.presets.name",
+      "blocks": [
+        {
+          "type": "_heading",
+          "static": true,
+          "id": "heading",
+          "blocks": [
+            {
+              "type": "_title",
+              "settings": { "title": "Contact form", "padding___bottom": "custom", "custom_padding_bottom": 0 }
+            },
+            {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Take the time to complete the form below. We usually reply within a business day.</p>",
+                "padding___top": "custom",
+                "custom_padding_top": 0,
+                "padding___bottom": "small"
+              }
+            }
+          ]
+        },
+        {
+          "type": "_dbtfy-cf-builder",
+          "static": true,
+          "id": "dbtfy-cf-builder",
+          "blocks": [
+            { "type": "_dbtfy-cfb-input-block" },
+            { "type": "_dbtfy-cfb-email-block" },
+            { "type": "_dbtfy-cfb-phone-block" },
+            {
+              "type": "_dbtfy-cfb-message-block",
+              "settings": {
+                "label": "Comment"
+              }
+            },
+            { "type": "_dbtfy-cfb-button-block" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

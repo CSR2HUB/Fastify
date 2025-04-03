@@ -1,0 +1,197 @@
+.dbtfy-contact-form-builder .select_icon {
+  transition: transform 0.3s;
+}
+
+.dbtfy-contact-form-builder .contact__fields {
+  display: block;
+}
+
+.dbtfy-contact-form-builder .title {
+  margin: 0 0 0.25rem;
+}
+
+.dbtfy-contact-form-builder hr {
+  background: rgba(var(--color-foreground), 1);
+}
+
+.dbtfy-contact-form-builder .checkmark-icon .icon-checkmark {
+  display: none;
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__disclosure__item.active .checkmark-icon .icon-checkmark {
+  display: inline;
+}
+
+.dbtfy-contact-form-builder .contact img {
+  max-width: 100%;
+}
+
+.dbtfy-contact-form-builder .contact .form__message {
+  align-items: center;
+}
+
+.dbtfy-contact-form-builder .contact .icon-success {
+  margin-top: 0.2rem;
+}
+
+.dbtfy-contact-form-builder .contact__button {
+  margin-top: 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .dbtfy-contact-form-builder .contact__button {
+    margin-top: 4rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .dbtfy-contact-form-builder .dbtfy-contact__planet-selector__close-button.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem;
+    background-color: transparent;
+    height: 4.4rem;
+    width: 4.4rem;
+  }
+
+  .dbtfy-contact-form-builder .dbtfy-contact__planet-selector__close-button .icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .dbtfy-contact-form-builder .dbtfy-contact__planet-filter {
+    padding: 1.5rem 2rem 0.6rem 1.5rem;
+  }
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__disclosure {
+  position: relative;
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__disclosure__button {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 4rem;
+  padding: 0 1.5rem 0 1.5rem;
+  font-size: 1.3rem;
+  background-color: transparent;
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__disclosure__list-wrapper {
+  border-width: var(--popup-border-width);
+  border-style: solid;
+  border-color: rgba(var(--color-foreground), var(--popup-border-opacity));
+  overflow: hidden;
+  position: relative;
+  display: none;
+  bottom: 0;
+  transform: translateY(-1rem);
+  z-index: 2;
+  background-color: rgb(var(--color-background));
+  border-radius: var(--popup-corner-radius);
+  box-shadow: var(--popup-shadow-horizontal-offset) var(--popup-shadow-vertical-offset) var(--popup-shadow-blur-radius)
+    rgba(var(--color-shadow), var(--popup-shadow-opacity));
+  max-height: 27.5rem;
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__disclosure__list {
+  position: relative;
+  overflow-y: auto;
+  font-size: 1.4rem;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  scroll-padding: 0.5rem 0;
+  max-height: 20.5rem;
+  max-width: 100%;
+  min-width: 12rem;
+  width: 100%;
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact-form__select {
+  border: 2px solid;
+  border-radius: var(--inputs-radius-outset);
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+  text-align: left;
+  min-height: calc(4rem + var(--inputs-border-width) * 2);
+  min-width: calc(7rem + var(--inputs-border-width) * 2);
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__disclosure__button.dbtfy-contact-form__select {
+  padding: calc(2rem + var(--inputs-border-width));
+  background: rgb(var(--color-background));
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact-form__select .icon-caret {
+  position: absolute;
+  content: '';
+  height: 0.6rem;
+  right: calc(var(--inputs-border-width) + 1.5rem);
+  top: calc(50% - 0.2rem);
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__planet-selector.link {
+  text-decoration: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: rgb(var(--color-foreground));
+  padding-right: 4rem;
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__planet-selector option {
+  color: #000000;
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__planet-selector__list {
+  padding-bottom: 0.95rem;
+  padding-top: 0;
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__planet-selector__close-button {
+  display: none;
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__planet-filter {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 0.5rem;
+
+  position: sticky;
+  top: -0.02rem;
+  background-color: rgb(var(--color-background));
+  z-index: 6;
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__planet {
+  padding-top: 0.6rem;
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__disclosure__link {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.5rem;
+  padding: 0.9rem 1.5rem;
+  text-decoration: none;
+  align-items: center;
+  line-height: calc(1 + 0.8 / var(--font-body-scale));
+  color: rgba(var(--color-foreground), 0.75);
+  word-break: break-word;
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__disclosure__link:hover {
+  color: rgb(var(--color-foreground));
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__disclosure__link .icon-checkmark {
+  width: 1rem;
+  margin-right: 0.2rem;
+}
+
+.dbtfy-contact-form-builder .dbtfy-contact__disclosure__button[aria-expanded='true'] .icon-caret {
+  transform: rotate(180deg);
+}

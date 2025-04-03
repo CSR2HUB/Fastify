@@ -1,0 +1,23 @@
+{% content_for 'blocks' %}
+
+{% schema %}
+{
+  "name": "t:blocks.name",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_dbtfy_pricing_item"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbfty-pricing-table.blocks.name",
+      "blocks": [
+        {
+          "type": "_dbtfy_pricing_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

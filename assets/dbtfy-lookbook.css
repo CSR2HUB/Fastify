@@ -1,0 +1,146 @@
+.dbtfy-lookbook {
+  display: block;
+}
+
+.dbtfy-lookbook .section-header .title {
+  margin: 0 0 0.5rem;
+}
+
+.dbtfy-lookbook .section-header .description {
+  margin-bottom: 2rem;
+}
+
+.dbtfy-lookbook .dbtfy-lookbook-inner {
+  position: relative;
+}
+
+.dbtfy-lookbook .dbtfy-lookbook-inner svg path,
+.dbtfy-lookbook .dbtfy-lookbook-inner svg ellipse {
+  fill: rgb(var(--color-foreground));
+}
+
+.dbtfy-lookbook .dbtfy-lookbook-point-list-item button {
+  position: absolute;
+  cursor: pointer;
+  display: block;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+}
+
+.dbtfy-lookbook .dbtfy-lookbook-point-list-item button:hover > span,
+.dbtfy-lookbook .dbtfy-lookbook-point-list-item button:focus > span {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.dbtfy-lookbook .dbtfy-lookbook-point-list-item button > span > span {
+  background: currentColor;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+}
+
+.dbtfy-lookbook .dbtfy-tooltip {
+  display: none;
+  width: var(--tooltip-width, 320px);
+  text-align: var(--tooltip-text-align, left);
+  max-width: 90vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1.5rem;
+  border-radius: 4px;
+  line-height: normal;
+  z-index: 9;
+}
+
+.dbtfy-lookbook .dbtfy-tooltip .card {
+  text-align: var(--tooltip-text-align, left);
+}
+
+.dbtfy-lookbook .dbtfy-lookbook-point-list-item button > span {
+  display: block;
+  padding: 3px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  background-color: transparent;
+  transition: all 0.2s ease-out;
+}
+
+.dbtfy-lookbook .img-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--border-radius);
+}
+
+.dbtfy-lookbook .dbtfy-lookbook-point-list-item button span {
+  border-color: var(--point-color);
+}
+
+.dbtfy-lookbook .dbtfy-lookbook-point-list-item button > span > span {
+  background: var(--point-color);
+  width: var(--point-diameter);
+  height: var(--point-diameter);
+}
+
+.dbtfy-lookbook .dbtfy-tooltip.show {
+  display: block;
+  animation: dbtfy_tooltip_animation_showing 0.4s ease-out both;
+}
+
+.dbtfy-lookbook .dbtfy-tooltip.hiding {
+  display: block;
+  animation: dbtfy_tooltip_animation_hiding 0.2s ease-out both;
+}
+
+@keyframes dbtfy_tooltip_animation_showing {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dbtfy_tooltip_animation_hiding {
+  to {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+.dbtfy-lookbook .dbtfy-tooltip .title {
+  font-size: calc(var(--font-heading-scale) * 1.5rem);
+  color: currentColor;
+  margin: 0 0 0.75rem;
+}
+
+.dbtfy-lookbook .dbtfy-tooltip .description {
+  font-size: 0.85em;
+  margin-bottom: 1rem;
+}
+
+.dbtfy-lookbook .dbtfy-tooltip .dbtfy-lookbook-product-img {
+  width: 100%;
+  height: auto;
+  margin: 0 0 1rem;
+}
+
+.dbtfy-lookbook .dbtfy-tooltip .dbtfy-lookbook-product-price {
+  margin: 0 0 0.5rem;
+}
+
+.dbtfy-lookbook .dbtfy-tooltip .dbtfy-lookbook-product-price-compare {
+  opacity: 0.6;
+  margin-right: 0.5rem;
+}
+
+.dbtfy-lookbook .dbtfy-tooltip a {
+  width: 100%;
+}

@@ -1,0 +1,25 @@
+.dbtfy-cookie-box.grid {
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.dbtfy-cookie-box .dbtfy-cookie-box--text {
+  text-align: left;
+}
+.dbtfy-cookie-box .dbtfy-cookie-box--text p {
+  margin: 0;
+}
+
+@media (max-width: 749px) {
+  .dbtfy-cookie-box .dbtfy-cookie-box--text {
+    text-align: center;
+  }
+
+  .dbtfy-cookie-box .dbtfy-cookie-box--button-wrapper {
+    justify-content: center;
+  }
+
+  .dbtfy-cookie-box.grid {
+    justify-content: center;
+  }
+}

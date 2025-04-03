@@ -1,0 +1,31 @@
+<div class="cart__ctas" {{ block.shopify_attributes }}>
+  <button
+    type="submit"
+    class=" cart__checkout-button button"
+    name="checkout"
+    form="CartDrawer-Form"
+    {% if cart == empty %}
+      disabled
+    {% endif %}
+  >
+    {%- render 'loading-spinner' -%}
+    <span>{{ 'sections.cart.checkout' | t }} - {{ cart.total_price | money_with_currency }}</span>
+  </button>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.cart-drawer.blocks.cart-checkout.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.cart-checkout.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.cart-drawer.blocks.cart-checkout.name"
+    }
+  ]
+}
+{% endschema %}

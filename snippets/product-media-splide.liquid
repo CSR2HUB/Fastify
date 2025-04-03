@@ -1,0 +1,151 @@
+<main-product-gallery
+  class="
+    {% if section.settings.enable_sticky_info %}
+      product__column-sticky
+    {% endif %}
+  "
+  data-synced-variant-image="{{ settings.dbtfy_synced_variant_image }}"
+>
+  <on-product-wishlist-compare>
+    {% if settings.dbtfy_wish_list and settings.dbtfy_wish_list_product_page_position == 'on-product-image' %}
+      {% render 'dbtfy-wishlist-badge', product_url: product.url, dbtfy_wish_list_hover: false %}
+    {% endif %}
+    {% if settings.dbtfy_quick_compare and settings.dbtfy_quick_compare_product_page_position == 'on-product-image' %}
+      {% render 'dbtfy-compare-badge', product_url: product.url, dbtfy_compare_hover: false %}
+    {% endif %}
+  </on-product-wishlist-compare>
+  <div
+    id="main-carousel"
+    aria-label="The carousel with thumbnails. Selecting a thumbnail will change the Beautiful Gallery carousel."
+    class="splide"
+  >
+    <div class="splide__track">
+      <ul class="splide__list">
+        {%- if product.featured_media != null -%}
+          <li class="splide__slide" data-position="1" data-media-id="{{ product.featured_media.id }}">
+            <a href="{{ product.featured_media | image_url }}">
+              {{
+                product.featured_media
+                | image_url: width: product.featured_media.width
+                | image_tag: class: image_class, loading: lazy, sizes: sizes, widths: '1346, 1426, 1646, 1946'
+              }}
+            </a>
+          </li>
+        {%- endif -%}
+        {% assign position = 2 %}
+        {%- for media in product.media -%}
+          {% if media.media_type == 'video' or media.media_type == 'external_video' %}
+            {% if media.media_type == 'video' %}
+              {% assign video_loaded = false %}
+              {% for media_video in media.sources %}
+                {% if video_loaded == false and media_video.format == 'mp4' %}
+                  {% assign video_loaded = true %}
+                  {% assign media_url = media_video.url %}
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              {% assign media_url = media | external_video_url %}
+            {% endif %}
+            <li class="splide__slide" data-position="{{ position }}" data-media-id="{{ media.id }}">
+              <a href="{{media_url}}" class="has-video">
+                {% render 'product-thumbnail',
+                  media: media,
+                  media_count: media_count,
+                  position: media_position,
+                  desktop_layout: section.settings.gallery_layout,
+                  mobile_layout: section.settings.mobile_thumbnails,
+                  loop: section.settings.enable_video_looping,
+                  modal_id: section.id,
+                  xr_button: true,
+                  media_width: media_width,
+                  media_fit: section.settings.media_fit,
+                  constrain_to_viewport: section.settings.constrain_to_viewport,
+                  lazy_load: lazy_load
+                %}
+              </a>
+            </li>
+          {% else %}
+            {%- unless media.id == product.featured_media.id -%}
+              <li class="splide__slide" data-position="{{ position }}" data-media-id="{{ media.id }}">
+                <a href="{{media | image_url}}">
+                  {{
+                    media.preview_image
+                    | image_url: width: media.preview_image.width
+                    | image_tag: loading: 'lazy', sizes: sizes, widths: '1346', id: thumbnail_id, alt: media.alt
+                    | escape
+                  }}
+                </a>
+              </li>
+            {% endunless %}
+          {% endif %}
+          {% assign position = position | plus: 1 %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div
+    id="thumbnail-carousel"
+    class="splide"
+    aria-label="The carousel with thumbnails. Selecting a thumbnail will change the Beautiful Gallery carousel."
+    data-show-arrows="{{ section.settings.enable_arrows }}"
+    data-show-arrows-mobile="{{ section.settings.mobile_thumbnails }}"
+  >
+    <div class="splide__track">
+      <ul class="splide__list">
+        {%- if product.featured_media != null -%}
+          <li class="splide__slide" data-position="1" data-media-id="{{ product.featured_media.id }}">
+            {{
+              product.featured_media
+              | image_url: width: '200', height: '200'
+              | image_tag: class: image_class, loading: lazy, sizes: sizes, widths: '1346, 1426, 1646, 1946'
+            }}
+          </li>
+        {%- endif -%}
+        {% assign position = 2 %}
+        {%- for media in product.media -%}
+          {%- unless media.id == product.featured_media.id -%}
+            <li class="splide__slide" data-position="{{ position }}" data-media-id="{{ media.id }}">
+              {{
+                media.preview_image
+                | image_url: width: '200', height: '200'
+                | image_tag: loading: 'lazy', sizes: sizes, widths: '1346', id: thumbnail_id, alt: media.alt
+                | escape
+              }}
+            </li>
+            {% assign position = position | plus: 1 %}
+          {% endunless %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</main-product-gallery>
+
+<script src="{{ 'main-product-gallery.js' | asset_url }}" defer="defer"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    new SimpleLightbox({
+      elements: `#main-carousel a`,
+      videoRegex: new RegExp(/(youtube\.com|vimeo\.com|\.mp4)/),
+    });
+  });
+</script>
+
+{% style %}
+  .splide__slide img {
+    max-width: 100%;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-position: center center;
+  }
+  .has-video .product-media-container,
+  .has-video .product-media-container.constrain-height .media.deferred-media {
+    height: 100%;
+    padding-top: 0;
+  }
+  .has-video .deferred-media video {
+    object-fit: cover;
+  }
+{% endstyle %}

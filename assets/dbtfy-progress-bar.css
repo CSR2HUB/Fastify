@@ -1,0 +1,79 @@
+.dbtfy-progress-bar .pie-wrapper {
+    position: relative;
+    width: 5em;
+    height: 5em;
+    margin: 0 auto;
+}
+
+.dbtfy-progress-bar .pie-wrapper .label {
+    position: absolute;
+    display: block;
+    background: none;
+    border-radius: 50%;
+    text-align: center;
+    cursor: default;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dbtfy-progress-bar .pie-wrapper .pie {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    clip: rect(0, 5em, 5em, 2.5em);
+}
+
+.dbtfy-progress-bar .pie-wrapper .pie .half-circle {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border: 0.5em solid rgba(var(--color-button),var(--alpha-button-background));
+    border-radius: 50%;
+    clip: rect(0em, 2.5em, 5em, 0em);
+    display: block;
+}
+
+.dbtfy-progress-bar .pie-wrapper .pie .half-circle.right-side {
+    transform: rotate(0deg);
+}
+
+.dbtfy-progress-bar .pie-wrapper .shadow {
+    width: 100%;
+    height: 100%;
+    border: 0.5em solid rgba(var(--color-foreground), var(--media-border-opacity));
+    border-radius: 50%;
+}
+
+.dbtfy-progress-bar[data-type=pie-chart] .label {
+    display: none;
+}
+
+.dbtfy-progress-bar[data-type="bar-chart"] {
+    margin-right: 0;
+    margin-bottom: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.dbtfy-progress-bar__label {
+    margin-right: 1rem;
+}
+
+.bar-chart__inner {
+    width: 100%;
+    height: 4px;
+    background-color: rgba(var(--color-foreground), var(--media-border-opacity));
+}
+
+.bar-chart__probress-bar {
+    display: block !important;
+    height: 100%;
+    background-color: rgba(var(--color-button),var(--alpha-button-background));
+}

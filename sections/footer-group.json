@@ -1,0 +1,240 @@
+{
+  "name": "t:sections.dbtfy-footer.name",
+  "type": "footer",
+  "sections": {
+    "dbtfy-footer": {
+      "type": "dbtfy-footer",
+      "blocks": {
+        "footer_block_d7Pmdm": {
+          "type": "_footer_block",
+          "settings": {
+            "column_width": 3
+          },
+          "blocks": {
+            "title_fNyEeL": {
+              "type": "_title",
+              "settings": {
+                "title": "About us",
+                "custom_color": false,
+                "title_color": "#000000",
+                "alignment": "inherit",
+                "size": "h4",
+                "style": "inherit",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              }
+            },
+            "description_y4Wzd7": {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Quality products, exceptional service.</p>",
+                "alignment": "inherit",
+                "padding___top": "custom",
+                "custom_padding_top": 0,
+                "padding___bottom": "custom",
+                "custom_padding_bottom": 0
+              }
+            },
+            "description_dBFMwn": {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Share store details, promotions, or brand content with your customers.</p>",
+                "alignment": "inherit",
+                "custom_bullet_icon": "",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              }
+            },
+            "footer_store_settings_DrjzK8": {
+              "type": "_footer-store-settings",
+              "settings": {
+                "show_email": true,
+                "show_phone": true,
+                "show_location": true,
+                "show_fax": true,
+                "fax": ""
+              }
+            },
+            "footer_social_media_zBUrFa": {
+              "type": "_footer-social-media",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "title_fNyEeL",
+            "description_y4Wzd7",
+            "description_dBFMwn",
+            "footer_store_settings_DrjzK8",
+            "footer_social_media_zBUrFa"
+          ]
+        },
+        "footer_block_U39rwE": {
+          "type": "_footer_block",
+          "settings": {
+            "column_width": 3
+          },
+          "blocks": {
+            "title_KiKBkx": {
+              "type": "_title",
+              "settings": {
+                "title": "Stay Updated",
+                "custom_color": false,
+                "title_color": "#000000",
+                "alignment": "inherit",
+                "size": "h4",
+                "style": "inherit",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              }
+            },
+            "description_mzEbYU": {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Sign up for exclusive offers and new arrivals!</p>",
+                "alignment": "inherit",
+                "padding___top": "custom",
+                "custom_padding_top": 0,
+                "padding___bottom": "extra_small"
+              }
+            },
+            "footer_newsletter_Jx3cr4": {
+              "type": "_footer-newsletter",
+              "settings": {
+                "show_newsletter_first_name": true,
+                "enable_newsletter_opt_in_checkbox": true,
+                "customer_tag": "newsletter"
+              }
+            }
+          },
+          "block_order": [
+            "title_KiKBkx",
+            "description_mzEbYU",
+            "footer_newsletter_Jx3cr4"
+          ]
+        },
+        "footer_block_pXW9e4": {
+          "type": "_footer_block",
+          "settings": {
+            "column_width": 3
+          },
+          "blocks": {
+            "title_fAVfzE": {
+              "type": "_title",
+              "settings": {
+                "title": "Quick Links",
+                "custom_color": false,
+                "title_color": "#000000",
+                "alignment": "inherit",
+                "size": "h4",
+                "style": "inherit",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              }
+            },
+            "description_f4Gfkz": {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Navigate our store easily and find what you're looking for.</p>",
+                "alignment": "inherit",
+                "padding___top": "custom",
+                "custom_padding_top": 0,
+                "padding___bottom": "custom",
+                "custom_padding_bottom": 4
+              }
+            },
+            "menu_RKRhxn": {
+              "type": "_menu",
+              "settings": {
+                "menu": "main-menu"
+              }
+            }
+          },
+          "block_order": [
+            "title_fAVfzE",
+            "description_f4Gfkz",
+            "menu_RKRhxn"
+          ]
+        },
+        "footer_block_8RExkA": {
+          "type": "_footer_block",
+          "settings": {
+            "column_width": 3
+          },
+          "blocks": {
+            "title_MrBwqM": {
+              "type": "_title",
+              "settings": {
+                "title": "Search",
+                "custom_color": false,
+                "title_color": "#000000",
+                "alignment": "inherit",
+                "size": "h4",
+                "style": "inherit",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              }
+            },
+            "description_AhJCr7": {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Find what you need quickly with our search tool.</p>",
+                "alignment": "inherit",
+                "padding___top": "custom",
+                "custom_padding_top": 0,
+                "padding___bottom": "extra_small"
+              }
+            },
+            "search_form_9xWwLQ": {
+              "type": "_search_form",
+              "settings": {
+                "search_display_type": "minimal"
+              }
+            }
+          },
+          "block_order": [
+            "title_MrBwqM",
+            "description_AhJCr7",
+            "search_form_9xWwLQ"
+          ]
+        }
+      },
+      "block_order": [
+        "footer_block_d7Pmdm",
+        "footer_block_U39rwE",
+        "footer_block_pXW9e4",
+        "footer_block_8RExkA"
+      ],
+      "settings": {
+        "show_on": "both",
+        "show_social_media": true,
+        "social_media_title": "Follow-us on social media!",
+        "copyright_text_position_desktop": "text-right",
+        "show_localization": true,
+        "payment_enable": true,
+        "show_business_registration": true,
+        "business_registration_heading": "Business registration number",
+        "business_registration": "",
+        "show_policy_links": true,
+        "show_shopify_powered": true,
+        "custom_credential": "{copyright}{year}, Fastify",
+        "color_scheme": "scheme-2",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
+    }
+  },
+  "order": ["dbtfy-footer"]
+}

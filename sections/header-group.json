@@ -1,0 +1,88 @@
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-bar-left-bar": {
+          "type": "_announcement-bar-left-bar",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "social_media_block_LUnrbc": {
+              "type": "_social-media-block",
+              "settings": {
+                "show_social": true
+              }
+            }
+          },
+          "block_order": ["social_media_block_LUnrbc"]
+        },
+        "announcement-bar-message": {
+          "type": "_announcement-bar-message",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "announcement_bar_message_block_zhLUgM": {
+              "type": "_announcement-bar-message-block",
+              "settings": {
+                "text": "Welcome to our store",
+                "link": ""
+              }
+            }
+          },
+          "block_order": ["announcement_bar_message_block_zhLUgM"]
+        },
+        "announcement-bar-right-bar": {
+          "type": "_announcement-bar-right-bar",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "language_currency_selector_block_crHGXK": {
+              "type": "_language-currency-selector-block",
+              "settings": {
+                "enable_country_selector": true,
+                "enable_language_selector": true
+              }
+            }
+          },
+          "block_order": ["language_currency_selector_block_crHGXK"]
+        }
+      },
+      "settings": {
+        "show_line_separator": true,
+        "sticky_bar": false,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "enable_small_text_on_mobile": false,
+        "padding___top": "none",
+        "padding___bottom": "none",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": ""
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "middle-left",
+        "menu": "main-menu",
+        "menu_type_desktop": "mega",
+        "sticky_header_type": "reduce-logo-size",
+        "header_transparent": true,
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "transparent_header_color_scheme": "scheme-2",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "enable_customer_avatar": true,
+        "mobile_logo_position": "center",
+        "margin_bottom": 0,
+        "padding_top": 8,
+        "padding_bottom": 8
+      }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

@@ -1,0 +1,51 @@
+.tesimonial-review-item .tesimonial__profile-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.tesimonial-review-item .tesimonial__profile-media {
+  width: 4rem;
+  flex-shrink: 0;
+}
+
+.tesimonial-review-item .tesimonial__review {
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.tesimonial-review-item .tesimonial__profile-media-content {
+  display: flex;
+  width: calc(100% - 6rem);
+  flex-wrap: wrap;
+  row-gap: 0.3rem;
+  column-gap: 0.6rem;
+}
+
+.tesimonial-review-item .tesimonial__profile-media-content .inline-richtext {
+  flex-shrink: 0;
+  display: contents;
+}
+
+.tesimonial-review-item .tesimonial__review .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.tesimonial-review-item .tesimonial__review .icon.empty-star-svg path {
+  stroke: rgba(var(--color-foreground), 0.5);
+}
+
+.tesimonial-review-item .tesimonial__profile-media .icon {
+  padding: 1.2rem;
+}
+
+@media (max-width: 575px) {
+  .tesimonial-review-item .tesimonial__review svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}

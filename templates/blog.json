@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "dbtfy-breadcrumbs": {
+      "type": "dbtfy-breadcrumbs",
+      "settings": {
+        "breadcrumbs": true,
+        "show_on": "both",
+        "show_social_media_icons": "both",
+        "share_on_facebook": true,
+        "share_on_messenger": true,
+        "tweet_on_twitter": true,
+        "pin_on_pinterest": true,
+        "share_on_whatsapp": true,
+        "share_on_linkedin": true,
+        "share_on_reddit": true,
+        "share_on_email": true,
+        "color_scheme": "scheme-2"
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "layout": "grid",
+        "show_image": true,
+        "image_height": "small",
+        "show_date": false,
+        "show_author": false
+      }
+    }
+  },
+  "order": ["dbtfy-breadcrumbs", "main"]
+}

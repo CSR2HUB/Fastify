@@ -1,0 +1,30 @@
+{%- liquid
+  assign social_icons = true
+  if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
+    assign social_icons = false
+  endif
+-%}
+{%- if block.settings.show_social and social_icons -%}
+  {%- render 'social-icons', block: block -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.social_media.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.announcement-bar.settings.header__1.content",
+      "info": "t:sections.announcement-bar.settings.header__1.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": false,
+      "label": "t:sections.announcement-bar.settings.show_social.label"
+    }
+  ],
+  "presets": [{ "name": "t:blocks.social_media.name" }]
+}
+{% endschema %}

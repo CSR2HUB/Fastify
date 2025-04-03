@@ -1,0 +1,42 @@
+<script>
+  var block_setting = {{ block.settings | json }};
+  {% capture card_html %}
+    {% for product_offer in block.settings.product_offer %}
+      <li id="Slide-{{ block.id }}" data-handle="{{ product_offer.handle }}" class="grid__item">
+      {% render 'card-product', 
+        card_product: product_offer,
+        media_aspect_ratio: 'inherit',
+        show_secondary_image: 'inherit',
+        quick_add: 'standard'
+       %}
+      </li>
+      {% endfor %}
+    {% endcapture %}
+  block_setting.card_html = `{{ card_html }}`;
+  Fastify.widgets['cart_upsell']['global'].push(block_setting);
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.cart-upsell.general.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:sections.cart-upsell.general.name"
+    },
+    {
+      "type": "product_list",
+      "id": "product_offer",
+      "label": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.settings.product_offer.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.cart-upsell.general.name"
+    }
+  ]
+}
+{% endschema %}

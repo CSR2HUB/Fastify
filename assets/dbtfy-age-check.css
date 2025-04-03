@@ -1,0 +1,64 @@
+.dbtfy-age-check {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dbtfy-age-check-birthdate,
+.dbtfy-age-check-birthdate button {
+  margin-top: 1.5rem;
+}
+@media (max-width: 768px) {
+  .dbtfy-age-check-birthdate,
+  .dbtfy-age-check-birthdate button {
+    margin-top: 1rem;
+  }
+}
+
+.dbtfy-age-check .dbtfy-age-check-title {
+  margin: 0;
+}
+
+.dbtfy-age-check figure {
+  margin: 0;
+}
+
+.dbtfy-age-check select {
+  border: 1px solid rgba(var(--color-button), var(--alpha-button-background));
+  min-height: 35px;
+  height: 35px;
+  font-size: 14px;
+}
+.dbtfy-age-check select:hover {
+  cursor: pointer;
+}
+.dbtfy-age-check .dbtfy-age-check-select {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.dbtfy-age-check-horizhontal .dbtfy-age-check-select {
+  flex-direction: row;
+}
+
+.dbtfy-age-check__verify--error,
+.dbtfy-age-check__verify-birth--error {
+  display: none;
+  color: red;
+}
+
+.dbtfy-age-check-select select::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+.dbtfy-age-check-select select::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+.dbtfy-age-check-select select::-webkit-scrollbar-thumb {
+  background: rgba(var(--color-foreground), 0.75);
+}

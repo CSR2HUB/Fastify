@@ -1,0 +1,82 @@
+.dbtfy-payment-icon-row {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dbtfy-trust-badge-images {
+  margin-bottom: 10px;
+}
+
+.dbtfy-trust-badge .dbtfy-trust-badge-images img {
+  object-fit: fill;
+  vertical-align: middle;
+  border-radius: 4px;
+}
+
+.dbtfy-trust-badge .dbtfy-trust-badge-images--columns img {
+  object-fit: fill;
+  vertical-align: middle;
+  border-radius: 8px;
+}
+
+.dbtfy-trust-badge .dbtfy-trust-badge-images--rows {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.dbtfy-trust-badge .dbtfy-trust-badge-images--rows-items {
+  display: flex;
+  gap: 20px;
+  text-align: start;
+  flex-wrap: wrap;
+}
+
+.dbtfy-trust-badge .dbtfy-trust-badge--enable-graylogo img {
+  vertical-align: middle;
+  opacity: var(--opacity);
+  filter: grayscale(100%);
+}
+
+.dbtfy-trust-badge .dbtfy-trust-badge--enable-graylogo img:hover {
+  opacity: 1;
+  filter: none;
+}
+
+.dbtfy-trust-badge .dbtfy-trust-badge-images--rows img {
+  object-fit: fill;
+  vertical-align: middle;
+  border-radius: 8px;
+}
+
+.dbtfy-trust-badge .single-block .trust_badge_image {
+  max-width: 140px;
+  object-fit: contain;
+  height: auto;
+}
+
+.dbtfy-trust-badge .dbtfy-trust-badge-images .dbtfy-payment-icon-row img {
+  width: var(--payment-icon-width);
+  height: var(--payment-icon-height);
+  vertical-align: unset;
+  object-fit: cover;
+  max-width: 100%;
+}
+
+.dbtfy-trust-badge .trust_badge_alignment.left .dbtfy-payment-icon-row {
+  justify-content: flex-start;
+}
+
+.dbtfy-trust-badge .trust_badge_alignment.center .dbtfy-payment-icon-row {
+  justify-content: center;
+}
+
+.dbtfy-trust-badge .trust_badge_alignment.right .dbtfy-payment-icon-row {
+  justify-content: flex-end;
+}
+
+.dbtfy-payment-icon-block svg {
+  vertical-align: middle;
+}

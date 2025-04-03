@@ -1,0 +1,21 @@
+{%- liquid
+  unless section.settings.product == blank
+    assign product = section.settings.product
+  endunless
+-%}
+{%- if product.description != blank -%}
+  <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
+    {{ product.description }}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:general.settings.description",
+  "presets": [
+    {
+      "name": "t:general.settings.description"
+    }
+  ]
+}
+{% endschema %}

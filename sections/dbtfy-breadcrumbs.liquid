@@ -1,0 +1,367 @@
+{% render 'widget-blocker',
+  enabled: settings.dbtfy_breadcrumbs,
+  section: section,
+  name: 'Breadcrumbs',
+  type: '⚡ Paid Sections'
+%}
+{% if request.design_mode or settings.dbtfy_breadcrumbs %}
+  {{ 'dbtfy-breadcrumbs.css' | asset_url | stylesheet_tag }}
+
+  {% render 'section-padding', section: section %}
+
+  {%- unless request.page_type == 'index'
+    or request.page_type == 'cart'
+    or request.page_type == 'list-collections'
+    or request.page_type == '404'
+  -%}
+    <dbtfy-breadcrumbs>
+      {%- liquid
+        assign social_share_title = section.settings.social_share_title
+
+        if section.settings.share_on_facebook == true
+          assign facebook = true
+        endif
+        if section.settings.share_on_messenger == true
+          assign messenger = true
+        endif
+        if section.settings.tweet_on_twitter == true
+          assign twitter = true
+        endif
+        if section.settings.pin_on_pinterest == true
+          assign pinterest = true
+        endif
+        if section.settings.share_on_linkedin == true
+          assign linkedin = true
+        endif
+        if section.settings.share_on_reddit == true
+          assign reddit = true
+        endif
+        if section.settings.share_on_whatsapp == true
+          assign whatsapp = true
+        endif
+        if section.settings.share_on_email == true
+          assign email = true
+        endif
+      -%}
+
+      {%- assign template_name = request.page_type | split: '.' | first -%}
+
+      {%- capture separator -%}
+      <li>
+        {% render 'material-icon', icon: 'Chevron Right' %}
+      </li>                 
+     {%- endcapture -%}
+      <div
+        class="show-on--{{section.settings.show_on}}"
+      >
+        <div
+          class="color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+        >
+          <div class="page-width">
+            <div class="dbtfy-breadcrumbs d-grid">
+              <div
+                class="
+                  dbtfy-breadcrumbs-list dbtfy-breadcrumbs-menu-icons
+                  {% if section.settings.show_social_media_icons == "mobile-only" %}
+                  grid--12-col
+                  {% else %}
+                  grid--9-col-desktop
+                  grid--7-col-tablet
+                  grid--12-col
+                  {% endif %}
+                "
+              >
+                <ul>
+                  <li>
+                    <a href="{{ routes.root_url }} "> {% render 'material-icon', icon: 'home' %} </a>
+                  </li>
+                  {{- separator -}}
+                  <li>{{ template_name | capitalize }}</li>
+                  {{- separator -}}
+                  {%- case template_name -%}
+                    {%- when 'page' -%}
+                      <li class="dbtfy-breadcrumbs-title">
+                        <a href="{{ page.url }}" aria-current="page"> {{ page.title }}</a>
+                      </li>
+
+                    {%- when 'product' -%}
+                      <li class="dbtfy-breadcrumbs-title">
+                        <a href="{{ product.url }}" aria-current="page">{{ product.title | capitalize }}</a>
+                      </li>
+
+                    {%- when 'collection' -%}
+                      <li class="dbtfy-breadcrumbs-title">
+                        <a href="{{ collection.url }}" aria-current="page">{{ collection.title | capitalize }}</a>
+                      </li>
+
+                    {%- when 'blog' -%}
+                      <li class="dbtfy-breadcrumbs-title">
+                        <a href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+                      </li>
+
+                    {%- when 'article' -%}
+                      <li class="dbtfy-breadcrumbs-title">
+                        <a href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+                      </li>
+                  {%- endcase -%}
+                </ul>
+              </div>
+              {% if facebook or messenger or twitter or pinterest or linkedin or whatsapp or email %}
+                <div class="dbtfy-breadcrumbs-list dbtfy-breadcrumbs-list-social grid--3-col-desktop grid--5-col-tablet grid--12-col show-on--{{ section.settings.show_social_media_icons }}">
+                  <ul class="">
+                    <li>{% render 'material-icon', icon: 'Share' %}</li>
+                    <li>Share</li>
+                    <li>
+                      {%- render 'social-sharing',
+                        facebook: facebook,
+                        messenger: messenger,
+                        twitter: twitter,
+                        pinterest: pinterest,
+                        linkedin: linkedin,
+                        whatsapp: whatsapp,
+                        reddit: reddit,
+                        email: email,
+                        title: social_share_title
+                      -%}
+                    </li>
+                  </ul>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </dbtfy-breadcrumbs>
+  {%- endunless -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-breadcrumbs.name",
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "show_social_media_icons",
+      "label": "t:sections.dbtfy-breadcrumbs.settings.show_icons_on.label",
+      "default": "both",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.social-media.settings.header.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "share_on_facebook",
+      "label": "t:settings_schema.social-media.settings.social_facebook_link.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "share_on_messenger",
+      "label": "t:settings_schema.social-media.settings.social_messenger_link.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "tweet_on_twitter",
+      "label": "t:settings_schema.social-media.settings.social_twitter_link.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "pin_on_pinterest",
+      "label": "t:settings_schema.social-media.settings.social_pinterest_link.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "share_on_whatsapp",
+      "label": "t:settings_schema.social-media.settings.social_whatsapp_link.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "share_on_linkedin",
+      "label": "t:settings_schema.social-media.settings.social_linkedin_link.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "share_on_reddit",
+      "label": "t:settings_schema.social-media.settings.social_reddit_link.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "share_on_email",
+      "label": "t:settings_schema.social-media.settings.social_email_link.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.all.color_schemes.default.options__3.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding_section.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:sections.all.padding_section.padding.padding_top",
+      "default": "small",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:sections.all.padding_section.padding.padding_bottom",
+      "default": "small",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-breadcrumbs.name"
+    }
+  ]
+}
+{% endschema %}

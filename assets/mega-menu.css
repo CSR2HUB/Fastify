@@ -1,0 +1,45 @@
+.dbtfy-mega-menu__image-item a {
+    display: block;
+}
+
+.dbtfy-mega-menu__image-media {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 1.6;
+    border-radius: var(--media-radius);
+}
+
+.dbtfy-mega-menu__image-media img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.dbtfy-mega-menu__image-media img:hover {
+    transition: transform var(--duration-long) ease;
+    transform: scale(1.03);
+}
+
+.grid--3-col .dbtfy-mega-menu__menu-container {
+    width: calc(66.66% - var(--grid-desktop-horizontal-spacing) * 1 / 3);
+    max-width: 66.66%;
+}
+
+.dbtfy-mega-menu__images {
+    margin-top: 20px;
+}
+
+.dbtfy-mega-menu__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.no-link:hover {
+    text-decoration: none;
+}

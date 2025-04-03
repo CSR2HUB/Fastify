@@ -1,0 +1,19 @@
+{% content_for 'blocks' %}
+
+{% schema %}
+{
+  "name": "t:blocks.name",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_dbtfy-custom-code-block"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom code",
+      "blocks": [{ "type": "_dbtfy-custom-code-block", "settings": {} }]
+    }
+  ]
+}
+{% endschema %}

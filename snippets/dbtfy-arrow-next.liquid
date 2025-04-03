@@ -1,0 +1,12 @@
+<button
+  type="button"
+  class="slider-button slider-button--next {{class}}"
+  {% if custom_selector %}
+    name="next-{{ custom_selector }}"
+  {% else %}
+    name="next"
+  {% endif %}
+  aria-label="{{ 'general.slider.next_slide' | t }}"
+>
+  {% render 'material-icon', icon: 'arrow_right' %}
+</button>

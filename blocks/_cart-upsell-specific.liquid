@@ -1,0 +1,68 @@
+<script>
+  var block_setting = {{ block.settings | json }};
+  {% assign replace_product = block.settings.product_trigger %}
+  {% if block.settings.adding_type == 'new' %}
+    {% assign replace_product = '' %}
+  {% endif %}
+  {% capture card_html %}
+    {% for product_offer in block.settings.product_offer %}
+      <li id="Slide-{{ block.id }}" class="add-as-{{ block.settings.adding_type }} grid__item" data-handle="{{ product_offer.handle }}">
+      {% render 'card-product', 
+        card_product: product_offer,
+        media_aspect_ratio: 'inherit',
+        show_secondary_image: 'inherit',
+        quick_add: 'standard',
+        replace_product: replace_product
+       %}
+      </li>
+      {% endfor %}
+    {% endcapture %}
+  block_setting.card_html = `{{ card_html }}`;
+  Fastify.widgets['cart_upsell']['specific'].push(block_setting);
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.cart-upsell.specific.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info",
+      "default": "t:sections.cart-upsell.specific.name"
+    },
+    {
+      "type": "product",
+      "id": "product_trigger",
+      "label": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.settings.product_trigger.label",
+      "info": "For Specific Product, you need to select Product trigger, otherwise Upsell will show as General"
+    },
+    {
+      "type": "product_list",
+      "id": "product_offer",
+      "label": "t:blocks.dbtfy-upsell-popup.blocks.upsell-products.settings.product_offer.label"
+    },
+    {
+      "type": "radio",
+      "id": "adding_type",
+      "label": "t:sections.cart-upsell.specific.adding_type.label",
+      "options": [
+        {
+          "value": "new",
+          "label": "t:sections.cart-upsell.specific.adding_type.options__1"
+        },
+        {
+          "value": "replace",
+          "label": "t:sections.cart-upsell.specific.adding_type.options__2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.cart-upsell.specific.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+.dbtfy-map .dbtfy-map-location {
+  width: 100%;
+}
+
+.dbtfy-map .dbtfy-map__container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 20px;
+}
+
+.dbtfy-map .dbtfy-map__container.has-background {
+  background-size: cover;
+  background-position: center;
+}
+
+.dbtfy-map .dbtfy-map-image {
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+}
+
+.dbtfy-map .dbtfy-map__heading,
+.dbtfy-map .dbtfy-map__content {
+  margin: 0 0 5px 0;
+}
+
+.dbtfy-map .dbtfy-map__info__card {
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Desktop view */
+@media screen and (min-width: 750px) {
+  .dbtfy-map.has-content .map-placeholder,
+  .dbtfy-map.has-content .dbtfy-map-image {
+    position: absolute;
+    height: 100%;
+    left: 0;
+  }
+}
+
+/* Mobile view */
+@media screen and (max-width: 749px) {
+  .dbtfy-map .dbtfy-map__container {
+    flex-direction: column;
+    height: auto;
+    background-size: contain;
+  }
+
+  .dbtfy-map .dbtfy-map__info__card {
+    max-width: 100% !important;
+  }
+}

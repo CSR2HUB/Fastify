@@ -1,0 +1,205 @@
+.dbtfy-modal * {
+  box-sizing: border-box;
+}
+
+.dbtfy-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  visibility: hidden;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  opacity: 0;
+  cursor: url("data:image/svg+xml,%3Csvg width='19' height='19' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.514.535l-6.42 6.42L2.677.536a1.517 1.517 0 00-2.14 0 1.517 1.517 0 000 2.14l6.42 6.419-6.42 6.419a1.517 1.517 0 000 2.14 1.517 1.517 0 002.14 0l6.419-6.42 6.419 6.42a1.517 1.517 0 002.14 0 1.517 1.517 0 000-2.14l-6.42-6.42 6.42-6.418a1.517 1.517 0 000-2.14 1.516 1.516 0 00-2.14 0z' fill='%23FFF' fill-rule='nonzero'/%3E%3C/svg%3E"),
+    auto;
+  overflow: hidden;
+}
+
+@supports ((-webkit-backdrop-filter: blur(12px)) or (backdrop-filter: blur(12px))) {
+  .dbtfy-modal {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* confirm and alerts
+-------------------------------------------------------------- */
+.dbtfy-modal--confirm .dbtfy-modal-box {
+  text-align: center;
+}
+
+/* modal
+-------------------------------------------------------------- */
+.dbtfy-modal--noOverlayClose {
+  cursor: default;
+}
+
+.dbtfy-modal--noClose .dbtfy-modal__close {
+  display: none;
+}
+
+.dbtfy-modal__close {
+  position: fixed;
+  top: 2.5rem;
+  right: 2.5rem;
+  z-index: 1000;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.dbtfy-modal__close svg * {
+  fill: currentColor;
+}
+
+.dbtfy-modal__close:hover {
+  color: #fff;
+}
+
+.dbtfy-modal-box {
+  position: relative;
+  flex-shrink: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  background: #fff;
+  opacity: 1;
+  cursor: auto;
+  will-change: transform, opacity;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.product-media-modal.media-modal {
+  cursor: unset;
+}
+
+.product-media-modal.media-modal .product-media-modal__content {
+  overflow: hidden;
+}
+
+.product-media-modal.media-modal img {
+  max-height: 100vh;
+  object-fit: contain;
+  border: none;
+  max-width: 100%;
+}
+
+/* size
+-------------------------------------------------------------- */
+@media screen and (min-width: 540px) {
+  .dbtfy-modal .dbtfy-modal-box--small {
+    max-width: 430px;
+  }
+  .dbtfy-modal .dbtfy-modal-box--medium {
+    max-width: 600px;
+  }
+  .dbtfy-modal .dbtfy-modal-box--large {
+    max-width: 800px;
+  }
+}
+
+/* state
+-------------------------------------------------------------- */
+.dbtfy-enabled {
+  position: fixed;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.dbtfy-modal--visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.dbtfy-modal--visible .dbtfy-modal-box {
+  animation: scale 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.dbtfy-modal--overflow {
+  overflow-y: scroll;
+  padding-top: 8vh;
+}
+
+/* responsive
+-------------------------------------------------------------- */
+@media (max-width: 540px) {
+  .dbtfy-modal {
+    padding-top: 60px;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .dbtfy-modal-box {
+    width: 100%;
+    margin: 0;
+  }
+
+  .dbtfy-modal--noClose {
+    top: 0;
+  }
+
+  .dbtfy-modal--noOverlayClose {
+    padding-top: 0;
+  }
+
+  .dbtfy-modal__close {
+    top: 0;
+    right: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 60px;
+    border: none;
+    box-shadow: none;
+    color: rgb(var(--color-foreground));
+    position: unset;
+  }
+
+  .dbtfy-modal__closeIcon {
+    vertical-align: middle;
+    font-size: 0;
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 50%;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .dbtfy-modal__closeIcon svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .dbtfy-newsletter-popup-overlay {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+/* animations
+-------------------------------------------------------------- */
+@keyframes scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

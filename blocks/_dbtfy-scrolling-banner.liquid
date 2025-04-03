@@ -1,0 +1,29 @@
+<ul>
+  {% content_for 'blocks' %}
+</ul>
+
+{% schema %}
+{
+  "name": "t:blocks.name",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_dbtfy-scrolling-banner_text"
+    },
+    {
+      "type": "_dbtfy-scrolling-banner_button"
+    },
+    {
+      "type": "_dbtfy-scrolling-banner_icon"
+    },
+    {
+      "type": "_dbtfy-scrolling-banner_image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.name"
+    }
+  ]
+}
+{% endschema %}

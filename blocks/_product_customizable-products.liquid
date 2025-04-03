@@ -1,0 +1,27 @@
+{% render 'widget-blocker-warning',
+  enabled: settings.dbtfy_customizable_products,
+  type: 'widget',
+  as: 'block',
+  name: 'Customizable Products',
+  id: block
+-%}
+{% render 'dbtfy-customizable-products', block: block %}
+
+{% schema %}
+{
+  "name": "t:sections.main-product.blocks.customizable_products.name",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:general.settings.heading",
+      "default": "Customizable products"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main-product.blocks.customizable_products.name"
+    }
+  ]
+}
+{% endschema %}

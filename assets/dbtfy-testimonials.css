@@ -1,0 +1,209 @@
+.dbtfy-testimonial-card {
+  background: rgb(var(--color-background))
+    linear-gradient(rgba(var(--color-foreground), 0.04), rgba(var(--color-foreground), 0.04));
+  border-radius: var(--text-boxes-radius);
+  overflow: hidden;
+  height: 100%;
+}
+
+.dbtfy-testimonial-item {
+  height: auto;
+}
+
+.dbtfy-tesimonial__body {
+  padding: 3rem;
+}
+
+@media (max-width: 768px) {
+  .dbtfy-tesimonial__body {
+    padding: 1.5rem;
+  }
+}
+
+.dbtfy-tesimonial__review {
+  margin-bottom: 2rem;
+}
+
+.dbtfy-tesimonial__review .icon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+}
+
+.dbtfy-tesimonial__profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dbtfy-tesimonial__profile--center {
+  flex-direction: column-reverse;
+  justify-content: center;
+  text-align: center;
+}
+
+.dbtfy-tesimonial__profile--right {
+  flex-direction: row-reverse;
+}
+
+.dbtfy-tesimonial__profile--center .dbtfy-tesimonial__profile-avatar {
+  margin-bottom: 1rem;
+}
+
+.dbtfy-tesimonial__profile-avatar .media {
+  width: 50px;
+  height: 50px;
+  aspect-ratio: 1;
+}
+
+.dbtfy-tesimonial__profile-avatar .media--rounded {
+  border-radius: var(--text-boxes-radius);
+}
+
+.dbtfy-tesimonial__profile-content .inline-richtext {
+  margin: 0;
+}
+
+.dbtfy-tesimonial__icon {
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.dbtfy-tesimonial__icon .media {
+  display: inline-block;
+}
+
+.dbtfy-tesimonial__icon.extra-small .material-symbols-outlined {
+  font-size: 12px;
+}
+
+.dbtfy-tesimonial__icon.small .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.dbtfy-tesimonial__icon.large .material-symbols-outlined {
+  font-size: 32px;
+}
+
+.dbtfy-tesimonial__icon.extra-large .material-symbols-outlined {
+  font-size: 42px;
+}
+
+.dbtfy-tesimonial__icon.extra-small .media {
+  width: 12px;
+  height: 12px;
+}
+
+.dbtfy-tesimonial__icon.small .media {
+  width: 18px;
+  height: 18px;
+}
+
+.dbtfy-tesimonial__icon.medium .media {
+  width: 24px;
+  height: 24px;
+}
+
+.dbtfy-tesimonial__icon.large .media {
+  width: 32px;
+  height: 32px;
+}
+
+.dbtfy-tesimonial__icon.extra-large .media {
+  width: 42px;
+  height: 42px;
+}
+
+@media (max-width: 767px) {
+  .dbtfy-tesimonial__icon.extra-small--mobile .material-symbols-outlined {
+    font-size: 12px;
+  }
+
+  .dbtfy-tesimonial__icon.small--mobile .material-symbols-outlined {
+    font-size: 18px;
+  }
+
+  .dbtfy-tesimonial__icon.medium--mobile .material-symbols-outlined {
+    font-size: 24px;
+  }
+
+  .dbtfy-tesimonial__icon.extra-small--mobile .media {
+    width: 12px;
+    height: 12px;
+  }
+
+  .dbtfy-tesimonial__icon.small--mobile .media {
+    width: 18px;
+    height: 18px;
+  }
+
+  .dbtfy-tesimonial__icon.medium--mobile .media {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.dbtfy-tesimonial__rte time {
+  font-weight: var(--font-heading-weight);
+  font-family: var(--font-heading-family);
+  margin-top: 1.5rem;
+}
+
+.dbtfy-tesimonial__body > * + * {
+  margin: 1rem 0;
+}
+
+.dbtfy-tesimonial__rte .rte-toggle-button {
+  margin-top: 2rem;
+}
+
+.dbtfy-testimonials-shadow {
+  position: relative;
+  z-index: 0;
+}
+
+.dbtfy-testimonials-shadow:not(.show-full)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  pointer-events: none;
+  background-image: linear-gradient(to bottom, transparent, rgb(var(--color-foreground)));
+}
+
+.dbtfy-testimonial-item__story .dbtfy-testimonial-card {
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .dbtfy-testimonial-item__story .dbtfy-testimonial-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dbtfy-testimonial-item__story .dbtfy-testimonial-card.image-last {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+@media (min-width: 768px) {
+  .dbtfy-testimonial-item__story .dbtfy-testimonial-card {
+    display: flex;
+  }
+
+  .dbtfy-testimonial-item__story .dbtfy-testimonial-card.image-last {
+    flex-direction: row-reverse;
+  }
+
+  .dbtfy-testimonial-item__story .dbtfy-testimonial__media {
+    flex: 1.5;
+  }
+
+  .dbtfy-testimonial-item__story .dbtfy-tesimonial__body {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

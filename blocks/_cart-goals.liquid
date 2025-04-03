@@ -1,0 +1,46 @@
+{%- if settings.dbtfy_cart_goal -%}
+  {% render 'widget-settings', key: 'dbtfy-cart-goal', settings: block.settings %}
+  {{ 'dbtfy-cart-goal.css' | asset_url | stylesheet_tag }}
+  <script>
+    Fastify.widgets['cart_goals'] = [];
+    Fastify.widgets['cart_goals']['global'] = [];
+  </script>
+  {% content_for 'blocks' %}
+
+  {%- unless cart == empty -%}
+    <dbtfy-cart-goal data-cart-total="{{ cart.total_price }}" {{ block.shopify_attributes }} hidden>
+      <div>
+        <div class="dbtfy-cart-progress-bar-container">
+          <span id="dbtfy-cart-progress-bar" style="width: var(--dbtfy-cart-goal-percenatge);"></span>
+        </div>
+        <div class="dbtfy-goal-message text-center">
+          <small>
+            <span class="dbtfy-cart-goal--message"></span>
+          </small>
+        </div>
+      </div>
+    </dbtfy-cart-goal>
+  {% endunless %}
+{% endif %}
+
+<script src="{{ 'dbtfy-cart-goal.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "t:sections.cart-drawer.blocks.cart-goal.name",
+  "class": "cart-goal",
+  "blocks": [
+    {
+      "type": "_cart-goal-general"
+    },
+    {
+      "type": "_cart-goal-by-country"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.cart-drawer.blocks.cart-goal.name"
+    }
+  ]
+}
+{% endschema %}

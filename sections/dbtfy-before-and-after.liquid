@@ -1,0 +1,509 @@
+{% render 'widget-blocker',
+  enabled: settings.dbtfy_before_after_image,
+  section: section,
+  name: 'before-and-after',
+  type: '⚡ Paid Sections'
+%}
+{% if request.design_mode or settings.dbtfy_before_after_image %}
+  {% liquid
+    capture slider_parameters
+      echo ' data-autoplay="' | append: section.settings.enable_autoplay | append: '"'
+      echo ' data-speed="' | append: section.settings.autoplay_speed | append: '"'
+      echo ' data-loop="' | append: section.settings.enable_loop | append: '"'
+      echo ' data-dots="' | append: section.settings.enable_dots | append: '"'
+      echo ' data-arrows="' | append: section.settings.enable_arrows | append: '"'
+      echo ' data-controls-position="' | append: section.settings.control_position | append: '"'
+    endcapture
+
+    assign slider_on = 'slider slider--everywhere'
+    if section.settings.slider_on == 'none'
+      assign slider_on = ''
+      assign slider_parameters = ''
+    elsif section.settings.slider_on != 'both'
+      assign slider_on = 'slider slider--' | append: section.settings.slider_on
+    endif
+
+    assign arrow_class = ''
+    if section.settings.arrow_position == 'middle'
+      assign arrow_class = 'slideshow__controls slideshow__controls--top'
+    endif
+
+    render 'custom-arrow-style'
+  %}
+  <style>
+    .section-{{ section.id }}-padding .dbtfy-before-after {
+      height: {{ section.settings.image_height | times: 0.75 | round: 0 }}px;
+    }
+
+    .section-{{ section.id }}-padding .before-after--handle-icon {
+      color: {{ section.settings.handle_color }};
+      background-color: {{ section.settings.handle_background_color }};
+    }
+
+    .section-{{ section.id }}-padding .before-after--handle {
+      background-color: {{ section.settings.handle_background_color }};
+    }
+
+    .section-{{ section.id }}-padding [data-layout="horizontal"] .before-after--handle-icon {
+      top: {{ section.settings.bullet_position }}% !important;
+    }
+
+    .section-{{ section.id }}-padding [data-layout="vertical"] .before-after--handle-icon {
+      left: {{ section.settings.bullet_position }}% !important;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding .dbtfy-before-after {
+        height: {{ section.settings.image_height }}px;
+      }
+    }
+  </style>
+
+  {% render 'section-padding', section: section %}
+
+  {{ 'dbtfy-before-and-after.css' | asset_url | stylesheet_tag }}
+
+  <dbtfy-before-after>
+    <div class="color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient show-on--{{ section.settings.show_on }}">
+      <div class="section-{{ section.id }}-padding {{ section.settings.container_size }}">
+        <div class="dbtfy-before-and-after__header {% if section.settings.text_alignment == 'center' %}page-width--narrow{% endif %} {{ section.settings.text_alignment }}">
+          {% content_for 'block', type: '_heading', id: 'heading' %}
+        </div>
+
+        <dbtfy-slider-component
+          {{ slider_parameters }}
+        >
+          <ul
+            class="width-auto-adjusted contains-content-container grid grid--1-col {{slider_on}}"
+            id="Slider-{{ section.id }}"
+            role="list"
+            style="overflow: hidden;"
+          >
+            {% content_for 'block', type: '_dbtfy-before-after', id: 'before-after' %}
+          </ul>
+          {% render 'dbtfy-arrow', class: arrow_class %}
+        </dbtfy-slider-component>
+      </div>
+    </div>
+  </dbtfy-before-after>
+
+  <script src="{{ 'dbtfy-before-and-after.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-before-and-after.name",
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "Show on",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ],
+      "default": "both"
+    },
+    {
+      "type": "select",
+      "id": "container_size",
+      "label": "t:sections.all.container_size.label",
+      "default": "page-width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:sections.all.button.options__2.label"
+        },
+        {
+          "value": "",
+          "label": "t:sections.all.container_size.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-before-and-after.settings.header__1.content"
+    },
+    {
+      "type": "select",
+      "id": "initial_direction",
+      "label": "t:sections.dbtfy-before-and-after.settings.initial_direction.label",
+      "default": "horizontal",
+      "options": [
+        {
+          "value": "horizontal",
+          "label": "t:general.settings.alignment.option__10"
+        },
+        {
+          "value": "vertical",
+          "label": "t:general.settings.alignment.option__11"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "initial_position",
+      "label": "t:sections.dbtfy-before-and-after.settings.initial_position.label",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "t:sections.dbtfy-before-and-after.settings.image_height.label",
+      "default": 500,
+      "min": 0,
+      "max": 1000,
+      "step": 10,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-before-and-after.settings.header__2.content"
+    },
+    {
+      "type": "text",
+      "id": "bullet_icon",
+      "label": "t:sections.dbtfy-before-and-after.settings.icon.label",
+      "default": "t:sections.dbtfy-before-and-after.settings.icon.default",
+      "info": "t:sections.all.icon.info"
+    },
+    {
+      "type": "color",
+      "label": "t:sections.dbtfy-before-and-after.settings.handle_color.label",
+      "id": "handle_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "t:sections.dbtfy-before-and-after.settings.handle_background_color.label",
+      "id": "handle_background_color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "select",
+      "id": "bullet_position",
+      "label": "t:general.settings.position.label",
+      "default": "50",
+      "options": [
+        {
+          "value": "25",
+          "label": "t:general.settings.alignment.option__1"
+        },
+        {
+          "value": "50",
+          "label": "t:general.settings.alignment.option__2"
+        },
+        {
+          "value": "75",
+          "label": "t:general.settings.alignment.option__3"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.slider.slider_settings"
+    },
+    {
+      "type": "select",
+      "id": "slider_on",
+      "default": "both",
+      "label": "t:general.settings.slider.Enable_slider",
+      "options": [
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        },
+        {
+          "value": "desktop",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "none",
+          "label": "t:sections.all.show_on.options__4.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "default": false,
+      "label": "t:general.settings.slider.enable_autoplay"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "t:general.settings.slider.autoplay_speed",
+      "default": 5,
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "default": true,
+      "label": "Loop",
+      "info": "Continue from the last slide to the first slide"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_dots",
+      "default": true,
+      "label": "t:general.settings.slider.show_dots"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_arrows",
+      "default": false,
+      "label": "t:general.settings.slider.show_arrows"
+    },
+    {
+      "type": "select",
+      "id": "arrow_color",
+      "default": "inherit",
+      "label": "t:general.settings.slider.arrow_color",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_color",
+      "label": "t:general.settings.slider.custom-arrow-color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_background_color",
+      "label": "t:general.settings.slider.custom-arrow-bg-color",
+      "default": "#7559ff"
+    },
+    {
+      "type": "select",
+      "id": "arrow_position",
+      "default": "bottom",
+      "label": "Arrow position",
+      "options": [
+        {
+          "value": "middle",
+          "label": "t:general.settings.alignment.option__2"
+        },
+        {
+          "value": "bottom",
+          "label": "t:general.settings.alignment.option__3"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "control_position",
+      "default": "inside",
+      "label": "Control Position",
+      "options": [
+        {
+          "value": "outside",
+          "label": "Outside"
+        },
+        {
+          "value": "inside",
+          "label": "Inside"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.all.color_schemes.default.options__3.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding_section.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:sections.all.padding_section.padding.padding_top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:sections.all.padding_section.padding.padding_bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-before-and-after.name",
+      "blocks": [
+        {
+          "type": "_heading",
+          "static": true,
+          "id": "heading",
+          "blocks": [
+            { "type": "_title", "settings": { "title": "See the Transformation" } },
+            {
+              "type": "_subtitle",
+              "settings": { "title": "Experience the remarkable transformations our products deliver." }
+            },
+            {
+              "type": "_description",
+              "settings": {
+                "description": "<p>From dull and dry to smooth and youthful. Achieve similar (or better) results with regular use of our products.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "type": "_dbtfy-before-after",
+          "static": true,
+          "id": "before-after",
+          "blocks": [
+            { "type": "_dbtfy-before-after-block", "settings": {} },
+            { "type": "_dbtfy-before-after-block", "settings": {} },
+            { "type": "_dbtfy-before-after-block", "settings": {} }
+          ],
+          "settings": {}
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

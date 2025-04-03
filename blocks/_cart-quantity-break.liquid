@@ -1,0 +1,20 @@
+{% if settings.dbtfy_quantity_breaks %}
+  {% render 'dbtfy-cart-quantity-break', block: block %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.cart-drawer.blocks.cart-quantity-break.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart-drawer.blocks.cart-quantity-break.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.cart-drawer.blocks.cart-quantity-break.name"
+    }
+  ]
+}
+{% endschema %}

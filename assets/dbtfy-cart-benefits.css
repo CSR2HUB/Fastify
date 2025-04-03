@@ -1,0 +1,19 @@
+.dbtfy-cart-benefits {
+  gap: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+.dbtfy-cart-benefits > div {
+  align-items: center;
+  justify-content: inherit;
+}
+
+.dbtfy-cart-benefits span {
+  line-height: normal;
+}
+
+.dbtfy-cart-benefits.content-container {
+  padding: 1rem;
+}

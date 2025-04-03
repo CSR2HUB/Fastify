@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "sort": "alphabetical",
+        "columns_desktop": 3,
+        "columns_mobile": "2"
+      },
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "blocks": {
+            "title_jLQgHn": {
+              "type": "_title",
+              "settings": {
+                "title": "Collection"
+              }
+            }
+          },
+          "block_order": ["title_jLQgHn"]
+        }
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,72 @@
+<div
+  class="field {% if block.settings.width_message == 'full-width' %}grid--12-col{% else %}grid--6-col{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  <textarea
+    rows="10"
+    id="ContactForm-body"
+    class="text-area field__input"
+    name="contact[{{ 'templates.contact.form.comment' | t }}]"
+    placeholder="{{ 'templates.contact.form.comment' | t }}"
+    style="min-height: {{ block.settings.min_height }}rem;"
+  >
+      {{- form.body -}}
+    </textarea>
+  <label class="form__label field__label" for="ContactForm-body">
+    {% if block.settings.label != blank %}
+      {{- block.settings.label -}}
+    {% else %}
+      {{- 'templates.contact.form.comment' | t -}}
+    {% endif %}
+  </label>
+</div>
+{% schema %}
+{
+  "name": "Message",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.block-name.label",
+      "info": "t:general.settings.block-name.info"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:general.settings.label",
+      "default": "t:sections.dbtfy-contact-form-builder.blocks.message.name"
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.message.settings.min_height.label",
+      "default": 20,
+      "min": 10,
+      "max": 40,
+      "unit": "rem"
+    },
+    {
+      "type": "select",
+      "id": "width_message",
+      "label": "t:sections.dbtfy-contact-form-builder.blocks.message.settings.width_message.label",
+      "default": "full-width",
+      "options": [
+        {
+          "value": "full-width",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.message.settings.width_message.options__1.label"
+        },
+        {
+          "value": "half-width",
+          "label": "t:sections.dbtfy-contact-form-builder.blocks.message.settings.width_message.options__2.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Message"
+    }
+  ]
+}
+{% endschema %}

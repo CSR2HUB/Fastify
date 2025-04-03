@@ -1,0 +1,27 @@
+{% if block.blocks.size > 0 %}
+  {% render 'widget-blocker',
+    enabled: settings.dbtfy_cart_upsell,
+    section: section,
+    name: 'Cart Upsell',
+    type: '⚡ Paid widget'
+  %}
+{% endif %}
+<script>
+  Fastify.widgets['cart_upsell'] = [];
+  Fastify.widgets['cart_upsell']['global'] = [];
+  Fastify.widgets['cart_upsell']['specific'] = [];
+</script>
+{% content_for 'blocks' %}
+{% schema %}
+{
+  "name": "t:sections.cart-upsell.name",
+  "blocks": [
+    {
+      "type": "_cart-upsell-general"
+    },
+    {
+      "type": "_cart-upsell-specific"
+    }
+  ]
+}
+{% endschema %}

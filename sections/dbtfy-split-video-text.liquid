@@ -1,0 +1,454 @@
+{% render 'widget-blocker',
+  enabled: settings.dbtfy_split_video_with_text,
+  section: section,
+  name: 'Split video text',
+  type: '⚡ Paid Sections'
+%}
+{% if request.design_mode or settings.dbtfy_split_video_with_text %}
+  {% render 'section-padding', section: section %}
+  {{ 'video-section.css' | asset_url | stylesheet_tag }}
+  {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {{ 'dbtfy-split-video-text.css' | asset_url | stylesheet_tag }}
+  <dbtfy-split-video-with-text>
+    <div class="color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient show-on--{{ section.settings.show_on }}">
+      <div class="section-{{ section.id }}-padding {{ section.settings.container_size }}">
+        <div class="grid grid--1-col grid--2-col-tablet grid--2-col-desktop dbtfy-split-video-text__wrapper dbtfy-split-video-text--{{ section.settings.video_position_desktop }} dbtfy-split-video-text--{{ section.settings.video_position_mobile }}">
+          <div class="grid__item dbtfy-split-video-text__video">
+            {% liquid
+              assign video = section.settings.video
+              assign video_link = section.settings.video_link
+
+              assign video_id = video.id | default: video_link.id
+              assign video_alt = video.alt
+              assign alt = 'sections.video.load_video' | t: description: video_alt | escape
+              assign poster = video.preview_image
+              assign ratio = '56.25%'
+              assign control = 0
+              if section.settings.enable_controls
+                assign control = 1
+              endif
+
+              case section.settings.video_height
+                when 'small'
+                  assign ratio = '43.25%'
+                when 'large'
+                  assign ratio = '100%'
+              endcase
+            %}
+            <div class="dbtfy-split-with-video-media__wrapper">
+              {% if video != blank or video_link != blank %}
+                <deferred-media
+                  class="dbtfy-split-with-video-media deferred-media gradient global-media-settings video-section__media media-fit-cover media"
+                  style="--ratio-percent: {{ ratio }}"
+                  data-media-id="{{ video_id }}"
+                >
+                  {% if section.settings.enable_autoplay %}
+                    {%- if video == null and video_link != null -%}
+                      {%- if video_link.type == 'youtube' -%}
+                        <iframe
+                          src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&controls={{ control }}&autoplay=1&mute=1&loop=1&playlist={{ video_id }}"
+                          class="js-youtube"
+                          allow="autoplay; encrypted-media"
+                          allowfullscreen
+                          title="{{ alt | escape }}"
+                        ></iframe>
+                      {%- else -%}
+                        <iframe
+                          src="https://player.vimeo.com/video/{{ video_id }}?controls={{ control }}&autoplay=1&mute=1&loop=1&playlist={{ video_id }}"
+                          class="js-vimeo"
+                          allow="autoplay; encrypted-media"
+                          allowfullscreen
+                          title="{{ alt | escape }}"
+                        ></iframe>
+                      {%- endif -%}
+                    {%- else -%}
+                      {{
+                        video
+                        | video_tag:
+                          image_size: '1100x',
+                          autoplay: true,
+                          loop: true,
+                          controls: section.settings.enable_controls,
+                          muted: true
+                      }}
+                    {% endif %}
+                  {% else %}
+                    <button
+                      id="Deferred-Poster-Modal-{{ video_id }}"
+                      class="video-section__poster media deferred-media__poster media--landscape"
+                      type="button"
+                      aria-label="{{ alt }}"
+                    >
+                      {%- if poster != null -%}
+                        {% render 'dbtfy-img', img: poster, lazy: 'lazy' %}
+                      {%- else -%}
+                        {{- 'product-6' | placeholder_svg_tag: 'placeholder-svg placeholder' -}}
+                      {%- endif -%}
+                      <span class="deferred-media__poster-button motion-reduce">
+                        <span class="svg-wrapper">
+                          {{- 'icon-play.svg' | inline_asset_content -}}
+                        </span>
+                      </span>
+                    </button>
+                    <template>
+                      {%- if video == null and video_link != null -%}
+                        {%- if video_link.type == 'youtube' -%}
+                          <iframe
+                            src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&controls={{ control }}&autoplay=1&mute=1&loop=1&playlist={{ video_id }}"
+                            class="js-youtube"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                            title="{{ alt | escape }}"
+                          ></iframe>
+                        {%- else -%}
+                          <iframe
+                            src="https://player.vimeo.com/video/{{ video_id }}?controls={{ control }}&autoplay=1&mute=1&loop=1&playlist={{ video_id }}"
+                            class="js-vimeo"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                            title="{{ alt | escape }}"
+                          ></iframe>
+                        {%- endif -%}
+                      {%- else -%}
+                        {{
+                          video
+                          | video_tag:
+                            image_size: '1100x',
+                            autoplay: true,
+                            loop: true,
+                            controls: section.settings.enable_controls,
+                            muted: false
+                        }}
+                      {% endif %}
+                    </template>
+                  {% endif %}
+                </deferred-media>
+              {% else %}
+                <div
+                  class="dbtfy-split-with-video-media global-media-settings background-transparent placeholder"
+                  style="aspect-ratio: 1"
+                >
+                  {{- 'image' | placeholder_svg_tag: 'placeholder-svg' -}}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="grid__item dbtfy-split-video-text__text">
+            <div class="dbtfy-split-video-text__rte {{ section.settings.text_alignment }} dbtfy-split-video-text__{{ section.settings.text_layout }} inner-spacing">
+              {% content_for 'block', type: '_cta_block', id: 'cta_block' %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dbtfy-split-video-with-text>
+{% endif %}
+{% schema %}
+{
+  "name": "t:sections.dbtfy_split_video_text.name",
+  "class": "dbtfy-split-video-text",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.dbtfy_split_video_text.settings.paragraph__1.content"
+    },
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "default": "both",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "container_size",
+      "label": "t:sections.all.container_size.label",
+      "default": "page-width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:sections.all.button.options__2.label"
+        },
+        {
+          "value": "",
+          "label": "t:sections.all.container_size.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy_split_video_text.settings.header__1.content"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:sections.dbtfy_split_video_text.settings.video.label",
+      "info": "t:sections.dbtfy_split_video_text.settings.video.info"
+    },
+    {
+      "type": "video_url",
+      "id": "video_link",
+      "accept": ["youtube", "vimeo"],
+      "label": "t:sections.dbtfy_split_video_text.settings.video_link.label",
+      "info": "t:sections.dbtfy_split_video_text.settings.video_link.info",
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "t:sections.dbtfy_split_video_text.settings.enable_autoplay.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_controls",
+      "label": "t:sections.dbtfy_split_video_text.settings.enable_controls.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "video_height",
+      "label": "t:sections.dbtfy_split_video_text.settings.video_height.label",
+      "default": "adapt",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.dbtfy_split_video_text.settings.video_height.options__1.label"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "video_position_desktop",
+      "label": "t:sections.dbtfy_split_video_text.settings.video_position_desktop.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:general.settings.alignment.option__4"
+        },
+        {
+          "value": "right",
+          "label": "t:general.settings.alignment.option__6"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "video_position_mobile",
+      "label": "t:sections.dbtfy_split_video_text.settings.video_position_mobile.label",
+      "default": "top",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:general.settings.alignment.option__1"
+        },
+        {
+          "value": "bottom",
+          "label": "t:general.settings.alignment.option__3"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_layout",
+      "label": "t:sections.dbtfy_split_video_text.settings.text_layout.label",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:sections.dbtfy_split_video_text.settings.text_layout.options__1.label"
+        },
+        {
+          "value": "overlap",
+          "label": "t:sections.dbtfy_split_video_text.settings.text_layout.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.all.color_schemes.default.options__3.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding_section.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:sections.all.padding_section.padding.padding_top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:sections.all.padding_section.padding.padding_bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy_split_video_text.name",
+      "blocks": [
+        {
+          "type": "_cta_block",
+          "static": true,
+          "id": "cta_block",
+          "blocks": [
+            {
+              "type": "_title",
+              "settings": { "title": "See What's New", "padding___bottom": "custom", "custom_padding_bottom": 0 }
+            },
+            {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Step into style and comfort. Experience unparalleled durability and elegance in one.</p>"
+              }
+            },
+            {
+              "type": "_double_button",
+              "settings": {
+                "button_label_1": "Shop Now",
+                "button_link_1": "",
+                "button_label_2": ""
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,34 @@
+.dbtfy-cart-discount .dbtfy-cart-discount__button {
+  min-width: 40px;
+  border: none;
+  border-left: 1px solid rgba(var(--color-foreground), var(--inputs-border-opacity));
+  cursor: pointer;
+  border-top-right-radius: var(--inputs-radius-outset);
+  border-bottom-right-radius: var(--inputs-radius-outset);
+}
+
+.dbtfy-cart-discount .field__input {
+  border-top-right-radius: unset;
+  border-bottom-right-radius: unset;
+}
+
+.cart__footer .dbtfy-cart-discount details[open] > summary .icon-caret {
+  transform: rotate(180deg);
+}
+
+.dbtfy-cart-discount-show {
+  font-weight: 600;
+}
+
+.dbtfy-cart-discount .discount-status {
+  flex: 1;
+  max-width: fit-content;
+  margin-right: auto;
+}
+
+.dbtfy-discount-modal-check-yes-no {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--grid-desktop-horizontal-spacing);
+}

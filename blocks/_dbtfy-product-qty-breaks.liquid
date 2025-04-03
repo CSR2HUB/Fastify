@@ -1,0 +1,79 @@
+<script>
+  Fastify.widgets['qty-breaks']['product_break'].push({{ block.settings | json }});
+</script>
+
+{% content_for 'blocks' %}
+
+{% schema %}
+{
+  "name": "t:blocks.quantity_breaks.blocks.product_break.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.visibility.header.content",
+      "info": "t:general.settings.visibility.header.info"
+    },
+    {
+      "type": "radio",
+      "id": "product_break_visibility",
+      "label": "t:general.settings.visibility.visibility.label",
+      "info": "t:general.settings.visibility.visibility.info",
+      "default": "all",
+      "options": [
+        {
+          "value": "all",
+          "label": "t:general.settings.visibility.visibility.options__1.label"
+        },
+        {
+          "value": "collection",
+          "label": "t:general.settings.visibility.visibility.options__2.label"
+        },
+        {
+          "value": "type",
+          "label": "t:general.settings.visibility.visibility.options__3.label"
+        },
+        {
+          "value": "tag",
+          "label": "t:general.settings.visibility.visibility.options__4.label"
+        },
+        {
+          "value": "product",
+          "label": "t:general.settings.visibility.visibility.options__5.label"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "id": "product_break_collection",
+      "label": "t:general.settings.visibility.collection.label"
+    },
+    {
+      "type": "text",
+      "id": "product_break_types",
+      "label": "t:general.settings.visibility.types.label",
+      "info": "t:general.settings.visibility.types.info"
+    },
+    {
+      "type": "text",
+      "id": "product_break_tags",
+      "label": "t:general.settings.visibility.tags.label",
+      "info": "t:general.settings.visibility.tags.info"
+    },
+    {
+      "type": "product",
+      "id": "product_break_product",
+      "label": "t:general.settings.visibility.product.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_dbtfy-product-qty-break"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.quantity_breaks.blocks.product_break.name"
+    }
+  ]
+}
+{% endschema %}

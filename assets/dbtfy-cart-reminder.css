@@ -1,0 +1,38 @@
+.dbtfy-cart-reminder {
+  align-items: center;
+  grid: auto / 7.5rem auto;
+  gap: 1.5rem;
+}
+
+.dbtfy-cart-reminder .dbtfy-cart-reminder__block {
+  text-align: left;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.dbtfy-cart-reminder .img-placeholder {
+  background: #fff;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.dbtfy-cart-reminder .dbtfy-cart-reminder__img {
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 7.5rem;
+}
+
+.dbtfy-cart-reminder .title {
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 575px) {
+  .dbtfy-cart-reminder .dbtfy-cart-reminder__block {
+    flex-direction: column;
+  }
+}

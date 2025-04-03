@@ -1,0 +1,38 @@
+.dbtfy-social-sharing .social-sharing-icons {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 4px;
+  padding: 0;
+  margin: 0;
+}
+
+.dbtfy-social-sharing .social-sharing-icons a {
+  display: flex;
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+}
+
+.dbtfy-social-sharing svg {
+  width: 19px;
+  height: 19px;
+}
+
+.dbtfy-social-sharing {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.dbtfy-social-sharing .social-sharing-title {
+  margin: 0;
+}
+
+.dbtfy-social-sharing > .social-sharing-icons > li > a {
+  display: flex;
+}
+
+.dbtfy-social-sharing > .social-sharing-icons > li > a > svg {
+  margin: 0 2px;
+}

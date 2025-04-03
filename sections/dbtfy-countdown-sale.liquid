@@ -1,0 +1,225 @@
+{% if request.design_mode or settings.dbtfy_countdown_sale %}
+  {% render 'widget-blocker',
+    enabled: settings.dbtfy_countdown_sale,
+    section: section,
+    name: 'Countdown Sale',
+    type: '⚡ Paid Sections'
+  %}
+
+  {{ 'dbtfy-countdown-sale.css' | asset_url | stylesheet_tag }}
+  {% render 'section-padding', section: section %}
+
+  {% style %}
+    @media (max-width:768px){
+       #dbtfy-countdown-sale-{{ section.id }} .dbtfy-countdown.expired {
+         font-size: calc(var(--font-heading-scale)* {{ settings["h2_font_size"] }}px);
+       }
+     }
+
+     @media (min-width:768px){
+       #dbtfy-countdown-sale-{{ section.id }} .dbtfy-countdown.expired {
+         font-size: calc(var(--font-heading-scale)* {{ settings["h2_font_size_mobile"] }}px);
+       }
+     }
+  {% endstyle %}
+
+  <dbtfy-countdown-sale>
+    <div
+      id="dbtfy-countdown-sale-{{ section.id }}"
+      class="dbtfy-countdown-sale color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient"
+      {{ section.shopify_attributes }}
+    >
+      <div class="page-width page-width section-{{ section.id }}-padding {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <div class="dbtfy-countdown-sale-inner">
+          {% content_for 'blocks' %}
+        </div>
+      </div>
+    </div>
+  </dbtfy-countdown-sale>
+
+  <script src="{{ "dbtfy-countdown-sale.js" | asset_url }}" defer></script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-countdown-sale.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.all.color_schemes.default.options__3.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding_section.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:sections.all.padding_section.padding.padding_top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:sections.all.padding_section.padding.padding_bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "_cta_block"
+    },
+    {
+      "type": "_countdown-sale-timer"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-countdown-sale.name",
+      "blocks": [
+        {
+          "type": "_cta_block",
+          "blocks": [
+            {
+              "type": "_title",
+              "settings": {
+                "title": "Countdown Sale",
+                "size": "h3"
+              }
+            },
+            {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Use this section to showcase your offers that require a sense of urgency.</p>"
+              }
+            },
+            {
+              "type": "_single_button",
+              "settings": {
+                "button_label": "Shop Now",
+                "button_link": "shopify://collections",
+                "button_style": "button button--primary"
+              }
+            }
+          ]
+        },
+        {
+          "type": "_countdown-sale-timer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

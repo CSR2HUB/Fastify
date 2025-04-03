@@ -1,0 +1,139 @@
+.dbtfy-sales-popup {
+  width: 450px;
+}
+
+.dbtfy-sales-popup--radius-edge {
+  border-radius: 50%;
+}
+
+.dbtfy-sales-popup--round-square {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+
+.dbtfy-sales-popup__info > * + *,
+.dbtfy-sales-popup__time {
+  margin: 0.2rem 0;
+}
+
+.dbtfy-sales-popup__info > *:first-child {
+  margin-bottom: 0.1rem;
+  font-size: 11px;
+}
+
+.dbtfy-sales-popup .badge {
+  margin-left: auto;
+  padding: 0.5rem 1rem;
+}
+
+.dbtfy-sales-popup .badge .material-symbols-outlined {
+  font-size: initial;
+}
+
+.dbtfy-sales-popup__progress-bar {
+  width: 100%;
+  height: 4px;
+  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.dbtfy-sales-popup__progress-bar-content {
+  height: 4px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 2px;
+  display: block !important;
+}
+
+.dbtfy-sales-popup__button {
+  font-size: 1.2rem;
+  padding: 1rem;
+  min-height: 0;
+  min-width: 0;
+}
+
+.dbtfy-sales-popup__link {
+  margin-left: auto;
+}
+
+.dbtfy-sales-popup__media {
+  overflow: hidden !important;
+}
+
+.dbtfy-sales-popup__media.circle {
+  border-radius: 50%;
+}
+
+.dbtfy-sales-popup__media.portrait {
+  aspect-ratio: 0.8;
+}
+
+.dbtfy-sales-popup__media.landscape {
+  aspect-ratio: 1.2;
+}
+
+.dbtfy-sales-popup__info a {
+  text-decoration: none;
+}
+
+.dbtfy-sales-popup__review {
+  margin-right: 1rem;
+}
+
+.dbtfy-sales-popup__time {
+  font-size: 1.2rem;
+}
+
+.dbtfy-sales-popup__icon {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  width: 14px;
+  margin-right: 0.5rem;
+}
+
+.dbtfy-sales-popup__icon img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.dbtfy-sales-popup__powerdby {
+  position: absolute;
+  right: 10px;
+  margin: 0;
+  bottom: -17px;
+}
+
+@media (max-width: 768px) {
+  .dbtfy-sales-popup {
+    padding: var(--grid-mobile-vertical-spacing) var(--grid-mobile-horizontal-spacing);
+    width: 100%;
+  }
+}
+
+@media (max-width: 575px) {
+  .dbtfy-sales-popup__media {
+    width: 70px !important;
+    height: 70px !important;
+  }
+}
+@media (max-width: 400px) {
+  .dbtfy-sales-popup__action .dbtfy-sales-popup__link {
+    font-size: 10px;
+  }
+
+  .dbtfy-sales-popup__action {
+    gap: 15px;
+  }
+
+  .dbtfy-sales-popup .grid--8-col {
+    margin-left: 14px;
+  }
+}

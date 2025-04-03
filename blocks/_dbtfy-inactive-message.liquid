@@ -1,0 +1,25 @@
+Fastify.widgets['inactive-tab-message'].blocks.push({{ block.settings | json }});
+Fastify.widgets['inactive-tab-message'].blocks.push({message:document.title});
+
+{% schema %}
+{
+  "name": "t:blocks.inactive-tab-message.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "message",
+      "label": "t:blocks.inactive-tab-message.settings.label",
+      "default": "🔥 Don't forget this..."
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.inactive-tab-message.name",
+      "settings": {
+        "message": "🔥 Don't forget this..."
+      }
+    }
+  ]
+}
+{% endschema %}

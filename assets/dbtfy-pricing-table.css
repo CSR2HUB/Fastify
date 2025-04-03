@@ -1,0 +1,92 @@
+.dbtfy-pricing-table .slider {
+  padding-top: 10px;
+  overflow: hidden;
+}
+
+.dbtfy-pricing-table .dbtfy-pricing--table-main--top-heading {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.dbtfy-pricing-table__block-main--title {
+  margin: 5px 0;
+}
+
+.dbtfy-pricing-table .dbtfy-pricing-table-block {
+  border-radius: 10px;
+  padding: 15px;
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dbtfy-pricing-table .dbtfy-grid-gap {
+  margin: 10px;
+}
+
+.dbtfy-pricing-table--tag-top-heading {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dbtfy-pricing-table .dbtfy-image--block {
+  margin: 0 -15px;
+  width: calc(100% + 30px);
+}
+
+.dbtfy-pricing-table-images--size img {
+  width: 100%;
+  height: 220px;
+  vertical-align: middle;
+}
+
+.dbtfy-pricing-table-icon {
+  margin: 6px 0;
+}
+
+.dbtfy-pricing-table-icon i {
+  font-size: 35px;
+}
+
+.dbtfy-pricing-table hr {
+  margin: 0 -10px;
+}
+
+.dbtfy-pricing-table--tag-description {
+  letter-spacing: 0;
+}
+
+.dbtfy-pricing-table .dbfty-pricing-table-button {
+  margin-top: 7px;
+}
+
+.dbtfy-pricing-table ul,
+.dbtfy-pricing-table ol {
+  margin: 0;
+  padding: 0;
+}
+
+.dbtfy-pricing-table ol {
+  padding-left: 20px;
+}
+
+.dbtfy-pricing-table ol li .material-icon {
+  display: none;
+}
+
+.dbtfy-pricing-table .dbtfy-pricing-table--heading,
+.dbtfy-pricing-table .dbtfy-pricing-table--subheading,
+.dbtfy-pricing-table .dbtfy-pricing-table--price {
+  margin: 0;
+}
+
+@media (max-width: 749px) {
+  .dbtfy-pricing-table .dbtfy-grid-gap {
+    margin: 10px;
+    gap: 14px;
+  }
+}

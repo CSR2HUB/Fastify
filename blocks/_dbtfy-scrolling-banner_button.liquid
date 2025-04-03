@@ -1,0 +1,47 @@
+<li class="" {{ block.shopify_attributes }}>
+  {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+    <a
+      href="{{block.settings.button_link}}"
+      class="{{ block.settings.button_style }}"
+      target="blank"
+    >
+      {{ block.settings.button_label }}
+    </a>
+  {% endif %}
+</li>
+{% schema %}
+{
+  "name": "t:sections.all.button.label",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.all.button.button_text_label",
+      "default": "t:sections.featured-collection.settings.view_all_style.button_default"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.all.button.button_link_label"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:sections.multirow.settings.button_style.label",
+      "options": [
+        { "value": "link underlined-link button--link", "label": "t:sections.all.button.options__1.label" },
+        { "value": "button button--tertiary", "label": "t:sections.all.button.options__2.label" },
+        { "value": "button button--primary", "label": "t:sections.all.button.options__3.label" },
+        { "value": "button button--secondary", "label": "t:sections.all.button.options__4.label" }
+      ],
+      "default": "button button--primary"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.all.button.label"
+    }
+  ]
+}
+{% endschema %}

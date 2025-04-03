@@ -1,0 +1,194 @@
+.dbtfy-add-on-cart {
+  --border-radius: var(--product-card-corner-radius);
+  --border-width: var(--product-card-border-width);
+  --image-padding: var(--product-card-image-padding);
+}
+.dbtfy-add-on-cart .switch {
+  position: relative;
+  display: inline-block;
+  width: 5.2rem;
+  height: 2.6rem;
+}
+
+.dbtfy-add-on-cart .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.dbtfy-add-on-cart .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(var(--color-button), 0.2);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.dbtfy-add-on-cart .slider:before {
+  position: absolute;
+  content: '';
+  height: 1.5rem;
+  width: 1.5rem;
+  left: 0.6rem;
+  bottom: 0.5rem;
+  background-color: rgb(var(--color-button-text));
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.dbtfy-add-on-cart input:checked + .slider {
+  background-color: rgba(var(--color-button));
+}
+
+.dbtfy-add-on-cart input:focus + .slider {
+  box-shadow: 0 0 0.1rem rgba(var(--color-button));
+}
+
+.dbtfy-add-on-cart input:checked + .slider:before {
+  -webkit-transform: translateX(2.5rem);
+  -ms-transform: translateX(2.5rem);
+  transform: translateX(2.5rem);
+}
+
+.dbtfy-add-on-cart .slider.round {
+  border-radius: 3.4rem;
+}
+
+.dbtfy-add-on-cart .slider.round:before {
+  border-radius: 50%;
+}
+
+.dbtfy-add-on-cart .dbtfy-add-on-cart__content {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 0.5rem;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.2);
+  border-radius: calc(var(--border-radius) - var(--border-width) - var(--image-padding));
+  justify-content: space-between;
+}
+
+.dbtfy-add-on-cart .dbtfy-add-on-cart__image-container {
+  max-width: 8rem;
+  flex-shrink: 0;
+  border-radius: calc(var(--border-radius) - var(--border-width) - var(--image-padding));
+  overflow: hidden;
+}
+
+.dbtfy-add-on-cart .dbtfy-add-on-cart__image-container img {
+  width: 8rem;
+  height: 8rem;
+  max-width: 100%;
+  vertical-align: middle;
+  object-fit: cover;
+}
+
+.dbtfy-add-on-cart .dbtfy-add-on-cart__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.dbtfy-add-on-cart .dbtfy-add-on-cart__title-text {
+  margin: 0;
+}
+
+.drawer .dbtfy-add-on-cart .dbtfy-add-on-cart__title-text {
+  font-size: 1.3rem;
+}
+
+.dbtfy-add-on-cart .dbtfy-add-on-cart__price {
+  flex-shrink: 0;
+}
+
+.dbtfy-add-on-cart .price-item--regular {
+  font-size: 1.4rem;
+}
+
+.drawer .dbtfy-add-on-cart .price-item--regular {
+  font-size: 1.3rem;
+}
+
+.drawer .dbtfy-add-on-cart .switch {
+  width: 4.5rem;
+  height: 2.3rem;
+}
+
+.drawer .dbtfy-add-on-cart .slider:before {
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
+.drawer .dbtfy-add-on-cart input:checked + .slider:before {
+  -webkit-transform: translateX(2.2rem);
+  -ms-transform: translateX(2.2rem);
+  transform: translateX(2.2rem);
+}
+
+.dbtfy-add-on-cart .dbtfy-add-on-cart__description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: normal;
+  font-size: 1.2rem;
+}
+
+.dbtfy-add-on-cart .price-item--last {
+  display: none !important;
+}
+
+.dbtfy-add-on-cart__content-inner {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+@media (max-width: 480px) {
+  .dbtfy-add-on-cart .switch {
+    width: 4.2rem;
+    height: 2.3rem;
+  }
+
+  .dbtfy-add-on-cart .slider:before {
+    height: 1.3rem;
+    width: 1.3rem;
+    bottom: 0.5rem;
+  }
+
+  .dbtfy-add-on-cart .dbtfy-add-on-cart__title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .dbtfy-add-on-cart .dbtfy-add-on-cart__image-container {
+    max-width: 7rem;
+  }
+
+  .dbtfy-add-on-cart .dbtfy-add-on-cart__image-container img {
+    width: 7rem;
+    height: 7rem;
+    object-fit: cover;
+  }
+
+  .drawer .dbtfy-add-on-cart input:checked + .slider:before {
+    -webkit-transform: translateX(1.9rem);
+    -ms-transform: translateX(1.9rem);
+    transform: translateX(1.9rem);
+  }
+
+  .dbtfy-add-on-cart input:checked + .slider:before {
+    -webkit-transform: translateX(1.7rem);
+    -ms-transform: translateX(1.7rem);
+    transform: translateX(1.7rem);
+  }
+}

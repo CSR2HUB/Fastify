@@ -1,0 +1,12 @@
+<button
+  type="button"
+  class="slider-button slider-button--prev {{ class }}"
+  {% if custom_selector %}
+    name="previous-{{ custom_selector }}"
+  {% else %}
+    name="previous"
+  {% endif %}
+  aria-label="{{ 'general.slider.previous_slide' | t }}"
+>
+  {% render 'material-icon', icon: 'arrow_left' %}
+</button>

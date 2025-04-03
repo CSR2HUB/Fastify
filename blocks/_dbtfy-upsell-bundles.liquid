@@ -1,0 +1,30 @@
+{% if block.blocks.size > 0 %}
+  {% render 'widget-blocker',
+    enabled: settings.dbtfy_upsell_bundles,
+    section: section,
+    name: 'Upsell Bundles',
+    type: '⚡ Paid widget'
+  %}
+{% endif %}
+<script>
+  Fastify.widgets['upsell_bundles'] = {
+    blocks: [],
+  };
+</script>
+{% content_for 'blocks' %}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-upsell-bundles.name",
+  "blocks": [
+    {
+      "type": "_dbtfy-upsell-bundle"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-upsell-bundles.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,23 @@
+{% if block.blocks.size > 0 %}
+  {% render 'widget-blocker',
+    enabled: settings.dbtfy_cart_countdown_timer,
+    section: section,
+    name: 'Cart Countdown Timer',
+    type: '⚡ Paid widget'
+  %}
+{% endif %}
+<script>
+  Fastify.widgets['cart_countdown_timer'] = [];
+</script>
+{% content_for 'blocks' %}
+
+{% schema %}
+{
+  "name": "t:blocks.cart-countdown-timer.settings.group_name",
+  "blocks": [
+    {
+      "type": "_cart-timer"
+    }
+  ]
+}
+{% endschema %}

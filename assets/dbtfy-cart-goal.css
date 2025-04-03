@@ -1,0 +1,68 @@
+.cart__footer > dbtfy-cart-goal {
+  width: 100%;
+  margin: 10px 0 0;
+}
+dbtfy-cart-goal > div {
+  margin-bottom: 10px;
+}
+
+.cart__footer dbtfy-cart-goal > div {
+  margin-bottom: 0;
+}
+
+.cart__footer dbtfy-cart-goal > div {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.cart__footer {
+  flex-wrap: wrap;
+}
+
+.dbtfy-cart-progress-bar-container {
+  width: 100%;
+  background-color: #eee;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+#dbtfy-cart-progress-bar {
+  display: block;
+  height: 20px;
+  background-color: var(--dbtfy-cart-goal-progresscolor);
+  border-radius: 10px;
+  -webkit-animation: dbtfy_progressBar 1s ease-in-out, progressarAnim 1s linear infinite;
+  animation: dbtfy_progressBar 1s ease-in-out, progressarAnim 1s linear infinite;
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-size: 3rem 3rem;
+}
+
+@keyframes dbtfy_progressBar {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: var(--dbtfy-cart-goal-percenatge);
+  }
+}
+
+@keyframes progressarAnim{
+  0% {
+      background-position: 0 0;
+  }
+  100% {
+      background-position: 3rem 0;
+  }
+}
+
+.dbtfy-goal-message {
+  line-height: normal;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 749px) {
+  .cart__footer > dbtfy-cart-goal {
+    margin: 0;
+  }
+}

@@ -1,0 +1,29 @@
+.dbtfy-minimum-order {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  line-height: normal;
+}
+
+.dbtfy-minimum-order i {
+  font-size: 19px;
+}
+
+.cart__footer .dbtfy-minimum-order .dbtfy-minimum-order__message {
+  line-height: normal;
+}
+
+.cart__footer .dbtfy-minimum-order .dbtfy-minimum-order__message {
+  text-align: center;
+  max-width: 350px;
+}
+
+.cart__footer .dbtfy-minimum-order {
+  justify-content: center;
+}
+
+@media (max-width: 575px) {
+  .dbtfy-minimum-order {
+    justify-content: center;
+  }
+}

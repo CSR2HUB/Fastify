@@ -1,0 +1,490 @@
+{% render 'widget-blocker',
+  section: section,
+  enabled: settings.dbtfy_logo_list,
+  name: 'Logo list',
+  type: '⚡ Paid Sections'
+%}
+{% render 'section-padding', section: section %}
+
+{% if request.design_mode or settings.dbtfy_logo_list %}
+  {% style %}
+    #shopify-section-{{section.id }} {
+      --gap: var(--grid-desktop-horizontal-spacing);
+      --duration: {{ section.settings.scrolling_speed }}s;
+      --scroll-start: 0;
+      --scroll-end: calc(-100% - var(--gap));
+    }
+    {% if section.settings.enable_scroll %}
+
+      .section-{{ section.id }}-padding ul li {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+    {% endif %}
+  {% endstyle %}
+
+  {% liquid
+    capture slider_parameters
+      echo ' data-autoplay="' | append: section.settings.enable_autoplay | append: '"'
+      echo ' data-speed="' | append: section.settings.autoplay_speed | append: '"'
+      echo ' data-loop="' | append: section.settings.enable_loop | append: '"'
+      echo ' data-dots="' | append: section.settings.enable_dots | append: '"'
+      echo ' data-arrows="' | append: section.settings.enable_arrows | append: '"'
+      echo ' data-controls-position="' | append: section.settings.control_position | append: '"'
+    endcapture
+
+    assign slider_on = 'slider slider--everywhere'
+    if section.settings.slider_on == 'none'
+      assign slider_on = ''
+      assign slider_parameters = ''
+    elsif section.settings.slider_on != 'both'
+      assign slider_on = 'slider slider--' | append: section.settings.slider_on
+    endif
+
+    assign arrow_class = ''
+    if section.settings.arrow_position == 'middle'
+      assign arrow_class = 'slideshow__controls slideshow__controls--top'
+    endif
+
+    render 'custom-arrow-style'
+  %}
+
+  {% render 'section-padding', section: section %}
+  {{ 'dbtfy-scrolling-banner.css' | asset_url | stylesheet_tag }}
+  {{ 'dbtfy-logo-list.css' | asset_url | stylesheet_tag }}
+
+  <dbtfy-logo-list>
+    <div class="color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} show-on--{{ section.settings.show_on }} gradient {% if section.settings.enable_scroll %}dbtfy-logo-list-scroll{% endif %}">
+      <div class="section-{{ section.id }}-padding {{ section.settings.container_size }}">
+        {% content_for 'block', type: '_heading', id: 'heading' %}
+
+        {% if section.settings.enable_scroll %}
+          <dbtfy-scrolling-banner
+            id="dbtfy-scrolling-banner-{{ section.id }}"
+            class="dbtfy-scrolling-banner {% if section.settings.auto_scroll_pause_on_hover %} enable_paused{% endif %}"
+            data-section-id="{{ section.id }}"
+            data-animation-duration="{{ section.settings.scrolling_speed }}"
+            data-marquee-direction="{{ section.settings.auto_scroll_direction }}"
+          >
+            <ul>
+              {% content_for 'block', type: '_dbtfy-logo-list', id: 'logo-list' %}
+            </ul>
+          </dbtfy-scrolling-banner>
+
+        {% else %}
+          <dbtfy-slider-component
+            {{ slider_parameters }}
+          >
+            <ul
+              class="{{ slider_on }} width-auto-adjusted contains-content-container grid grid--{{ section.settings.slides_per_row_mobile }}-col grid--{{ section.settings.slides_per_row }}-col-desktop"
+              id="Slider-{{ section.id }}"
+              role="list"
+            >
+              {% content_for 'block', type: '_dbtfy-logo-list', id: 'logo-list' %}
+            </ul>
+            {% render 'dbtfy-arrow', class: arrow_class %}
+          </dbtfy-slider-component>
+        {% endif %}
+      </div>
+    </div>
+  </dbtfy-logo-list>
+
+  {% if section.settings.enable_scroll %}
+    <script src="{{ 'dbtfy-scrolling-banner.js' | asset_url }}" defer></script>
+  {% endif %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-logo-list.name",
+  "class": "dbtfy-logo-list",
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "default": "both",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "container_size",
+      "label": "t:sections.all.container_size.label",
+      "default": "page-width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:sections.all.button.options__2.label"
+        },
+        {
+          "value": "",
+          "label": "t:sections.all.container_size.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-logo-list.settings.header__1.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_gray_logos",
+      "label": "t:sections.dbtfy-logo-list.settings.enable_gray_logos.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_card",
+      "label": "t:sections.dbtfy-logo-list.settings.enable_card.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.slider.auto_scrolling"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll",
+      "label": "t:sections.dbtfy-logo-list.settings.enable_scroll",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mask",
+      "label": "t:sections.dbtfy-logo-list.settings.enable_mask",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "auto_scroll_direction",
+      "label": "t:sections.dbtfy-logo-list.settings.auto_scroll_direction.label",
+      "default": "normal",
+      "options": [
+        {
+          "value": "reverse",
+          "label": "t:general.settings.alignment.option__4"
+        },
+        {
+          "value": "normal",
+          "label": "t:general.settings.alignment.option__6"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "scrolling_speed",
+      "label": "t:sections.dbtfy-logo-list.settings.auto_scroll_speed.label",
+      "default": 24,
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_scroll_pause_on_hover",
+      "label": "t:sections.dbtfy-logo-list.settings.auto_scroll_pause_on_hover.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.slider.slider_settings"
+    },
+    {
+      "type": "select",
+      "id": "slider_on",
+      "default": "both",
+      "label": "t:general.settings.slider.Enable_slider",
+      "options": [
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        },
+        {
+          "value": "desktop",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "none",
+          "label": "t:sections.all.show_on.options__4.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "default": false,
+      "label": "t:general.settings.slider.enable_autoplay"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "t:general.settings.slider.autoplay_speed",
+      "default": 5,
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "default": true,
+      "label": "Loop",
+      "info": "Continue from the last slide to the first slide"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_dots",
+      "default": true,
+      "label": "t:general.settings.slider.show_dots"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_arrows",
+      "default": true,
+      "label": "t:general.settings.slider.show_arrows"
+    },
+    {
+      "type": "select",
+      "id": "arrow_color",
+      "default": "inherit",
+      "label": "t:general.settings.slider.arrow_color",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_color",
+      "label": "t:general.settings.slider.custom-arrow-color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "custom_arrow_background_color",
+      "label": "t:general.settings.slider.custom-arrow-bg-color",
+      "default": "#7559ff"
+    },
+    {
+      "type": "select",
+      "id": "arrow_position",
+      "default": "middle",
+      "label": "Arrow position",
+      "options": [
+        {
+          "value": "middle",
+          "label": "t:general.settings.alignment.option__2"
+        },
+        {
+          "value": "bottom",
+          "label": "t:general.settings.alignment.option__3"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "slides_per_row",
+      "label": "t:sections.dbtfy-logo-list.settings.slides_per_row.label",
+      "default": 6,
+      "min": 2,
+      "max": 6,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "slides_per_row_mobile",
+      "label": "t:sections.dbtfy-logo-list.settings.slides_per_row_mobile.label",
+      "default": 3,
+      "min": 1,
+      "max": 3,
+      "step": 1
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.all.color_schemes.default.options__3.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding_section.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:sections.all.padding_section.padding.padding_top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:sections.all.padding_section.padding.padding_bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-logo-list.name",
+      "blocks": [
+        {
+          "type": "_heading",
+          "static": true,
+          "id": "heading",
+          "blocks": [
+            {
+              "type": "_title",
+              "settings": { "title": "Featured on" }
+            }
+          ]
+        },
+        {
+          "type": "_dbtfy-logo-list",
+          "static": true,
+          "id": "logo-list",
+          "blocks": [
+            { "type": "_dbtfy-logo-list-item", "settings": {} },
+            { "type": "_dbtfy-logo-list-item", "settings": {} },
+            { "type": "_dbtfy-logo-list-item", "settings": {} },
+            { "type": "_dbtfy-logo-list-item", "settings": {} },
+            { "type": "_dbtfy-logo-list-item", "settings": {} },
+            { "type": "_dbtfy-logo-list-item", "settings": {} },
+            { "type": "_dbtfy-logo-list-item", "settings": {} },
+            { "type": "_dbtfy-logo-list-item", "settings": {} }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

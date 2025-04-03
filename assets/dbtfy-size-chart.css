@@ -1,0 +1,38 @@
+dbtfy-size-chart {
+  display: inline-block;
+}
+.dbtfy-size-chart__label--wrapper {
+  display: inline-block;
+}
+
+.dbtfy-size-chart__label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dbtfy-size-chart__label:hover {
+  cursor: pointer;
+}
+
+.dbtfy-size-chart-modal {
+  padding: 20px;
+}
+
+.dbtfy-size-chart-modal .dbtfy-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(var(--color-foreground));
+}
+
+.dbtfy-size-chart-modal .dbtfy-modal-title {
+  flex-grow: 1;
+  margin: 0;
+  color: rgb(var(--color-foreground));
+}
+.dbtfy-size-chart-modal .dbtfy-modal-content {
+  padding-top: 20px;
+  color: rgb(var(--color-foreground));
+}

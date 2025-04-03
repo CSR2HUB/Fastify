@@ -1,0 +1,17 @@
+.dbtfy-section-copy {
+    border-radius: 0px 0px 10px 10px;
+    padding: 8px;
+    background-color: #595D62;
+    color: #FFFFFF;
+    position: fixed;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    border: none;
+    z-index: 9;
+}
+
+.dbtfy-section-copy a {
+    color: #FFFFFF;
+    text-decoration: none;
+}

@@ -1,0 +1,90 @@
+dbtfy-dropdown {
+  position: relative;
+  display: block;
+}
+
+.dbtfy-dropdown__button {
+  position: relative;
+  text-align: left !important;
+  justify-content: flex-start !important;
+  padding: 0 1.5rem !important;
+}
+.dbtfy-dropdown__button:after {
+  box-shadow: 0 0 0 calc(0.1rem + var(--inputs-border-width))
+    rgba(var(--color-foreground), var(--inputs-border-opacity)) !important;
+}
+
+.dbtfy-dropdown__button .icon {
+  position: absolute;
+  top: calc(50% - 0.2rem);
+  right: 1.5rem;
+  width: 1rem;
+}
+
+dbtfy-dropdown .dbtfy-dropdown__button {
+  color: inherit;
+}
+
+.dbtfy-dropdown__button[aria-expanded='true'] .icon {
+  transform: rotate(180deg);
+}
+
+.dbtfy-dropdown__list {
+  background-color: rgb(var(--color-background));
+  animation: animateMenuOpen var(--duration-default) ease;
+  border-width: var(--popup-border-width);
+  border-style: solid;
+  border-color: rgba(var(--color-foreground), var(--popup-border-opacity));
+  overflow: hidden;
+  position: absolute;
+  bottom: 100%;
+  transform: translateY(-1rem);
+  z-index: 2;
+  background-color: rgb(var(--color-background));
+  border-radius: var(--popup-corner-radius);
+  box-shadow: var(--popup-shadow-horizontal-offset) var(--popup-shadow-vertical-offset) var(--popup-shadow-blur-radius)
+    rgba(var(--color-shadow), var(--popup-shadow-opacity));
+  max-height: 27.5rem;
+  width: 100%;
+}
+
+.dbtfy-dropdown__list:not([hidden]) {
+  bottom: initial;
+  top: 100%;
+  right: 0;
+  transform: translateY(0);
+}
+
+.dbtfy-dropdown__list ul {
+  max-height: 18rem;
+  overflow-y: auto;
+}
+
+.dbtfy-dropdown__list ul::-webkit-scrollbar {
+  width: 3px;
+}
+
+.dbtfy-dropdown__list ul::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dbtfy-dropdown__list ul::-webkit-scrollbar-thumb {
+  background: rgba(var(--color-foreground), 0.75);
+}
+
+.dbtfy-dropdown__input {
+  display: none;
+}
+
+.dbtfy-dropdown__label {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.5rem;
+  padding: 0.9rem 1.5rem;
+  text-decoration: none;
+  line-height: calc(1 + 0.8 / var(--font-body-scale));
+  color: rgba(var(--color-foreground), 0.75);
+  word-break: break-word;
+  cursor: pointer;
+  font-size: 1.2rem;
+}

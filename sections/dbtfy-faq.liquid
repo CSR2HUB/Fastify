@@ -1,0 +1,424 @@
+{% render 'widget-blocker', enabled: settings.dbtfy_faq, section: section, name: 'FAQ', type: '⚡ Paid Sections' %}
+{% if request.design_mode or settings.dbtfy_faq %}
+  {{ 'dbtfy-faq.css' | asset_url | stylesheet_tag }}
+
+  {% render 'section-padding', section: section %}
+
+  <dbtfy-faq
+    data-search-enabled="{{ section.settings.show_search }}"
+  >
+    <div class="dbtfy-faq show-on--{{section.settings.show_on}} color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding {% if section.settings.fillable_color %}dbtfy-fillable-color{% endif %}">
+      <div class="{% if section.settings.container_size == 'container'%}page-width{% endif %}">
+        {% content_for 'block', type: '_heading', id: 'heading' %}
+
+        {%- if section.settings.show_search -%}
+          <div
+            class="dbtfy-faq-search-bar text-center {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            {% if settings.animations_reveal_on_scroll %}
+              data-cascade
+              style="--animation-order: 0;"
+            {% endif %}
+          >
+            <div class="field">
+              <input
+                class=" search__input field__input"
+                type="search"
+                value="{{ search.terms | escape }}"
+                placeholder="{{ section.settings.search_placeholder }}"
+              >
+              <label class="field__label">{{ section.settings.search_placeholder }}</label>
+            </div>
+          </div>
+        {%- endif -%}
+        <div
+          class="dbtfy-faq-question {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: 1;"
+          {% endif %}
+        >
+          <div class="dbtfy-faq-group-wrapper">
+            {% content_for 'blocks' %}
+
+            <h2 class="dbtfy-faq-no-result">
+              {{ section.settings.no_result_text }}
+            </h2>
+          </div>
+        </div>
+        <div
+          class="dbtfy-faq-banner {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: 3;"
+          {% endif %}
+        >
+          {%- if section.settings.show_banner -%}
+            <div class="dbtfy-faq-banner-wrapper text-center content-container">
+              {%- if section.settings.banner_icon != blank -%}
+                <span class="dbtfy-faq-banner-icon">
+                  {% render 'material-icon', icon: section.settings.banner_icon, filled: true %}
+                </span>
+              {%- endif -%}
+
+              {%- if section.settings.banner_heading != blank -%}
+                <h2 class="dbtfy-faq-banner-heading">{{ section.settings.banner_heading }}</h2>
+              {%- endif -%}
+
+              {%- if section.settings.banner_subheading != blank -%}
+                <div class="dbtfy-faq-banner-subheading">{{ section.settings.banner_subheading }}</div>
+              {%- endif -%}
+
+              {%- if section.settings.banner_button_label != blank and section.settings.banner_button_url != blank -%}
+                {% assign button_size = section.settings.button_size %}
+                {% if button_size == 'inherit' %}
+                  {% assign button_size = settings.button_size %}
+                {% endif %}
+                <a
+                  class="dbtfy-faq-banner-button {{ section.settings.banner_button_style }} {{ button_size }}"
+                  href="{{ section.settings.banner_button_url }}"
+                >
+                  <span>
+                    {{ section.settings.banner_button_label }}
+                  </span>
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </dbtfy-faq>
+
+  <script src="{{ "dbtfy-faq.js" | asset_url }}" defer></script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-faq.name",
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "default": "both",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "container_size",
+      "label": "t:sections.all.container_size.label",
+      "default": "container",
+      "options": [
+        { "value": "container", "label": "t:sections.all.button.options__2.label" },
+        { "value": "container-full", "label": "t:sections.all.container_size.options__2.label" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-faq.settings.search.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "t:sections.dbtfy-faq.settings.show_search.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "t:sections.dbtfy-faq.settings.search_placeholder.label",
+      "default": "t:sections.dbtfy-faq.settings.search_placeholder.default"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "no_result_text",
+      "label": "t:sections.dbtfy-faq.settings.no_result.label",
+      "default": "t:sections.dbtfy-faq.settings.no_result.default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-faq.settings.answer.content"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "t:general.settings.alignment.desktop",
+      "default": "text-left",
+      "options": [
+        { "value": "text-left", "label": "t:general.settings.alignment.option__4" },
+        { "value": "text-center", "label": "t:general.settings.alignment.option__5" },
+        { "value": "text-right", "label": "t:general.settings.alignment.option__6" },
+        { "value": "text-justify", "label": "t:general.settings.alignment.option__7" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_alignment_mobile",
+      "label": "t:general.settings.alignment.mobile",
+      "default": "text-left",
+      "options": [
+        { "value": "text-left", "label": "t:general.settings.alignment.option__4" },
+        { "value": "text-center", "label": "t:general.settings.alignment.option__5" },
+        { "value": "text-right", "label": "t:general.settings.alignment.option__6" },
+        { "value": "text-justify", "label": "t:general.settings.alignment.option__7" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-faq.settings.banner.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_banner",
+      "label": "t:sections.dbtfy-faq.settings.banner_show.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "banner_icon",
+      "label": "t:sections.dbtfy-faq.settings.banner_icon.label",
+      "info": "t:sections.all.icon.info",
+      "default": "help"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "banner_heading",
+      "label": "t:sections.dbtfy-faq.settings.banner_heading.label",
+      "default": "t:sections.dbtfy-faq.settings.banner_heading.default"
+    },
+    {
+      "type": "richtext",
+      "id": "banner_subheading",
+      "label": "t:sections.dbtfy-faq.settings.banner_subheading.label",
+      "default": "t:sections.dbtfy-faq.settings.banner_subheading.default"
+    },
+    {
+      "type": "text",
+      "id": "banner_button_label",
+      "label": "t:sections.dbtfy-faq.settings.banner_button_label.label",
+      "default": "t:sections.dbtfy-faq.settings.banner_button_label.default"
+    },
+    {
+      "type": "url",
+      "id": "banner_button_url",
+      "label": "t:sections.dbtfy-faq.settings.banner_button_url.label"
+    },
+    {
+      "type": "select",
+      "id": "banner_button_style",
+      "label": "t:sections.all.button.label",
+      "options": [
+        {
+          "value": "link underlined-link button--link",
+          "label": "t:sections.all.button.options__1.label"
+        },
+        {
+          "value": "button button--tertiary",
+          "label": "t:sections.all.button.options__2.label"
+        },
+        {
+          "value": "button button--primary",
+          "label": "t:sections.all.button.options__3.label"
+        },
+        {
+          "value": "button button--secondary",
+          "label": "t:sections.all.button.options__4.label"
+        }
+      ],
+      "default": "button button--secondary"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "default": "inherit",
+      "label": "t:general.settings.size.label",
+      "options": [
+        { "value": "inherit", "label": "t:general.settings.size.option__1" },
+        { "value": "button--small", "label": "t:general.settings.size.option__3" },
+        { "value": "button--medium", "label": "t:general.settings.size.option__5" },
+        { "value": "", "label": "t:general.settings.size.option__10" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "fillable_color",
+      "label": "t:sections.dbtfy-faq.settings.fillable_color.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.all.color_schemes.default.options__3.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding_section.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:sections.all.padding_section.padding.padding_top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:sections.all.padding_section.padding.padding_bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "_dbtfy-faq-group"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-faq.name",
+      "blocks": [
+        {
+          "type": "_heading",
+          "static": true,
+          "id": "heading",
+          "blocks": [
+            {
+              "type": "_title",
+              "settings": { "title": "Faq", "alignment": "text-center" }
+            }
+          ]
+        },
+        {
+          "type": "_dbtfy-faq-group",
+          "blocks": [
+            { "type": "_dbtfy-faq-question" },
+            { "type": "_dbtfy-faq-question" },
+            { "type": "_dbtfy-faq-question" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

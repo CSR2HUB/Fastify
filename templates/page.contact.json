@@ -1,0 +1,76 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "double_image_banner": {
+      "type": "double-image-banner",
+      "settings": {
+        "image": "shopify://shop_images/Image_banner_2x_8.png",
+        "image_overlay_opacity": 20,
+        "image_height": "adapt",
+        "desktop_content_position": "middle-left",
+        "show_text_box": false,
+        "desktop_content_alignment": "left",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "blocks": {
+           "title_jLQgHn": {
+              "type": "_title",
+              "settings": {
+                "title": "Contact form"
+              }
+            }
+          },
+          "block_order": ["title_jLQgHn"]
+        },
+        "dbtfy-contact-form": {
+          "type": "_dbtfy-contact-form",
+          "static": true,
+          "blocks": {
+            "input": {
+              "type": "_dbtfy-cfb-input-block"
+            },
+            "email": {
+              "type": "_dbtfy-cfb-email-block"
+            },
+            "phone": {
+              "type": "_dbtfy-cfb-phone-block"
+            },
+            "message": {
+              "type": "_dbtfy-cfb-message-block"
+            },
+            "button": {
+              "type": "_dbtfy-cfb-button-block"
+            }
+          },
+          "block_order": [
+            "input",
+            "email",
+            "phone",
+            "email",
+            "message",
+            "button"
+          ]
+        }
+       
+      }
+    }
+  },
+  "order": ["main", "double_image_banner", "form"]
+}

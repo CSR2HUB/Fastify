@@ -1,0 +1,75 @@
+<div class="dbtfy-block__store-info-list">
+  {%- if block.settings.show_email or block.settings.show_phone -%}
+    <div class="list-unstyled">
+      {%- if block.settings.show_email -%}
+        <a class="link" href="mailto:{{ shop.email | escape }}">
+          {% render 'material-icon', icon: 'mail' %}
+          {{ shop.email }}
+        </a>
+      {%- endif -%}
+
+      {%- if block.settings.show_phone and shop.phone -%}
+        <a class="link" href="tel:{{ shop.phone | remove: '-' | replace: ' ', '' }}">
+          {% render 'material-icon', icon: 'call' %}
+          {{ shop.phone }}
+        </a>
+      {%- endif -%}
+
+      {%- if block.settings.show_fax and block.settings.fax != blank -%}
+        <a class="link" href="fax:{{ block.settings.fax | remove: '-' | replace: ' ', '' }}">
+          {% render 'material-icon', icon: 'print' %}
+          {{ block.settings.fax }}
+        </a>
+      {%- endif -%}
+
+      {%- if block.settings.show_location -%}
+        <a class="link" href="https://maps.google.com?daddr={{ shop.address.summary | escape }}">
+          {% render 'material-icon', icon: 'location_on' %}
+          {{ shop.address.summary }}
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-footer.settings.store_settings",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_email",
+      "label": "t:sections.dbtfy-footer.blocks.text.settings.show_email.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone",
+      "label": "t:sections.dbtfy-footer.blocks.text.settings.show_phone.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_location",
+      "label": "t:sections.dbtfy-footer.blocks.text.settings.show_location.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_fax",
+      "label": "t:sections.dbtfy-footer.blocks.text.settings.show_fax.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "fax",
+      "label": "t:sections.dbtfy-footer.blocks.text.settings.fax_number.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-footer.settings.store_settings"
+    }
+  ]
+}
+{% endschema %}

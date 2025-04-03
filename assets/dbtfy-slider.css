@@ -1,0 +1,97 @@
+.dbtfy-slider {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  overflow: hidden;
+  position: relative;
+}
+
+.dbtfy-slider-list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 100%;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+}
+
+.dbtfy-slider-list::-webkit-scrollbar {
+  display: none;
+}
+
+.dbtfy-slide {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 20px;
+  font-size: 24px;
+  text-align: center;
+  user-select: none;
+  transition: transform 0.3s ease;
+  scroll-snap-align: start;
+}
+
+.dbtfy-slider-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 20px auto;
+  max-width: 600px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.dbtfy-slider-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  margin: 0;
+}
+
+.dbtfy-slider-button:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dbtfy-slider-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dbtfy-slider-counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Container for multiple sliders */
+.sliders-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  margin: 0 auto;
+}

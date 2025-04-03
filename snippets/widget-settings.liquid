@@ -1,0 +1,9 @@
+<script>
+  Fastify.widgets['{{ key }}'] = {{ settings | json }};
+  {% if section.blocks %}
+    Fastify.widgets['{{ key }}'].blocks = [];
+    {% for block in section.blocks %}
+      Fastify.widgets['{{ key }}'].blocks.push({{ block.settings | json }});
+    {% endfor %}
+  {% endif %}
+</script>

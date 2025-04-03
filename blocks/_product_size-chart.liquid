@@ -1,0 +1,162 @@
+{%- liquid
+  unless section.settings.product == blank
+    assign product = section.settings.product
+  endunless
+  render 'dbtfy-size-chart', block: block, product: product
+-%}
+
+{% schema %}
+{
+  "name": "t:sections.main-product.blocks.size_chart.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "t:sections.main-product.blocks.size_chart.settings.icon.label",
+      "info": "t:sections.all.icon.info",
+      "default": "t:sections.main-product.blocks.size_chart.settings.icon.default"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.main-product.blocks.size_chart.settings.button_label.label",
+      "default": "t:sections.main-product.blocks.size_chart.settings.button_label.default"
+    },
+    {
+      "type": "select",
+      "id": "popup_size",
+      "label": "t:sections.main-product.blocks.size_chart.settings.popup_size.label",
+      "default": "large",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "size_guide_title",
+      "label": "t:general.settings.heading",
+      "default": "Title"
+    },
+    {
+      "type": "page",
+      "id": "size_guide_page_content",
+      "label": "t:sections.main-product.blocks.size_chart.settings.page_content.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.visibility.header.content",
+      "info": "t:general.settings.visibility.header.info"
+    },
+    {
+      "type": "radio",
+      "id": "visibility",
+      "label": "t:general.settings.visibility.visibility.label",
+      "info": "t:general.settings.visibility.visibility.info",
+      "default": "all",
+      "options": [
+        {
+          "value": "all",
+          "label": "t:general.settings.visibility.visibility.options__1.label"
+        },
+        {
+          "value": "collection",
+          "label": "t:general.settings.visibility.visibility.options__2.label"
+        },
+        {
+          "value": "type",
+          "label": "t:general.settings.visibility.visibility.options__3.label"
+        },
+        {
+          "value": "tag",
+          "label": "t:general.settings.visibility.visibility.options__4.label"
+        },
+        {
+          "value": "product",
+          "label": "t:general.settings.visibility.visibility.options__5.label"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:general.settings.visibility.collection.label"
+    },
+    {
+      "type": "text",
+      "id": "types",
+      "label": "t:general.settings.visibility.types.label",
+      "info": "t:general.settings.visibility.types.info"
+    },
+    {
+      "type": "text",
+      "id": "tags",
+      "label": "t:general.settings.visibility.tags.label",
+      "info": "t:general.settings.visibility.tags.info"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:general.settings.visibility.product.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.content"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.all.color_schemes.default.options__3.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main-product.blocks.size_chart.name"
+    }
+  ]
+}
+{% endschema %}

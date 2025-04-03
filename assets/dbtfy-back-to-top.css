@@ -1,0 +1,44 @@
+.dbtfy-back-to-top {
+  --dbtfy-btt-bottom-margin: 20px;
+  position: fixed;
+  bottom: var(--dbtfy-btt-bottom-margin);
+  z-index: 1000;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+  padding: 10px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-color: rgba(var(--color-foreground));
+  overflow: hidden;
+}
+.dbtfy-back-to-top svg {
+  fill: rgba(var(--color-foreground));
+}
+
+.dbtfy-back-to-top--left {
+  left: 20px;
+}
+
+.dbtfy-back-to-top--center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dbtfy-back-to-top--right {
+  right: 20px;
+}
+
+.dbtfy-back-to-top__image {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 0 auto;
+}
+
+.dbtfy-back-to-top__scroll-animation-container {
+  mix-blend-mode: overlay;
+  height: var(--scroll-back-to-to-height);
+  background-color: rgba(var(--color-foreground));
+}

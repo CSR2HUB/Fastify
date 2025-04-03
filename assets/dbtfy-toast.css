@@ -1,0 +1,78 @@
+/* Container positioning */
+.dbtfy-toast-container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 998;
+  width: calc(100% - 2.5rem * 2);
+  max-width: max-content;
+}
+
+.dbtfy-toast-container.dbtfy-toast-top-right {
+  top: 2.5rem;
+  right: 2.5rem;
+  align-items: flex-end;
+}
+
+.dbtfy-toast-container.dbtfy-toast-top-left {
+  top: 2.5rem;
+  left: 2.5rem;
+  align-items: flex-start;
+}
+
+.dbtfy-toast-container.dbtfy-toast-bottom-right {
+  bottom: 2.5rem;
+  right: 2.5rem;
+  align-items: flex-end;
+}
+
+.dbtfy-toast-container.dbtfy-toast-bottom-left {
+  bottom: 2.5rem;
+  left: 2.5rem;
+  align-items: flex-start;
+}
+
+.dbtfy-toast-container.dbtfy-toast-bottom-center {
+  align-items: center;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dbtfy-toast-container.dbtfy-toast-top-center {
+  align-items: center;
+  top: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Toast notification styling */
+.dbtfy-toast {
+  transition: opacity 0.5s, transform 0.5s;
+  display: flex;
+  /* align-items: center; */
+  overflow: hidden;
+  margin: calc(2.5rem / 2) 0;
+  position: relative;
+}
+
+.dbtfy-toast-box {
+  display: flex;
+}
+
+.dbtfy-toast-hide {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* Close icon styling */
+.dbtfy-toast-close {
+  position: absolute;
+  right: calc(2.5rem / 2);
+  /* padding-left: 10px; */
+  cursor: pointer;
+  /* font-weight: bold; */
+  /* font-size: 1.2rem; */
+  /* line-height: 1; */
+}

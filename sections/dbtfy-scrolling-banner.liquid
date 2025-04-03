@@ -1,0 +1,298 @@
+{% if request.design_mode or settings.dbtfy_scrolling_banner %}
+  {% render 'widget-blocker',
+    enabled: settings.dbtfy_scrolling_banner,
+    section: section,
+    name: 'Scrolling Banner',
+    type: '⚡ Paid Sections'
+  %}
+  {% render 'section-padding', section: section %}
+
+  {%- style -%}
+    .section-{{ section.id }}-padding ul li {
+      padding-left: {{ section.settings.mobile_gap }}px;
+      padding-right: {{ section.settings.mobile_gap }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding ul li {
+        padding-left: {{ section.settings.gap }}px;
+        padding-right: {{ section.settings.gap }}px;
+      }
+    }
+  {%- endstyle -%}
+
+  {{ 'dbtfy-scrolling-banner.css' | asset_url | stylesheet_tag }}
+  <dbtfy-scrolling-section>
+    <div class="color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding gradient relative show-on--{{ section.settings.show_on }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} ">
+      <div class="page-width relative">{% content_for 'block', type: '_heading', id: 'heading' %}</div>
+
+      <dbtfy-scrolling-banner
+        id="dbtfy-scrolling-banner-{{ section.id }}"
+        class="dbtfy-scrolling-banner {% if section.settings.pause_on_hover %} enable_paused{% endif %}"
+        data-section-id="{{ section.id }}"
+        data-animation-duration="{{ section.settings.animation_duration }}"
+        data-marquee-direction="{{ section.settings.marquee_direction }}"
+      >
+        {% content_for 'block', type: '_dbtfy-scrolling-banner', id: 'dbtfy-scrolling-banner' %}
+      </dbtfy-scrolling-banner>
+
+      {%- if section.settings.background_image != blank -%}
+        <div class="media-wrapper media-wrapper--cover media-wrapper--center-center {% if section.settings.show_overlay %} overlay{% endif %} h-100 w-100 absolute">
+          {{-
+            section.settings.background_image
+            | image_url: width: section.settings.background_image.width
+            | image_tag:
+              loading: 'lazy',
+              sizes: '100vw',
+              widths: '300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600',
+              class: 'media'
+          -}}
+        </div>
+      {%- endif -%}
+    </div>
+  </dbtfy-scrolling-section>
+  <script src="{{ 'dbtfy-scrolling-banner.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy-scrolling-banner.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on",
+      "label": "t:sections.all.show_on.label",
+      "default": "both",
+      "options": [
+        {
+          "value": "desktop-only",
+          "label": "t:sections.all.show_on.options__1.label"
+        },
+        {
+          "value": "mobile-only",
+          "label": "t:sections.all.show_on.options__2.label"
+        },
+        {
+          "value": "both",
+          "label": "t:sections.all.show_on.options__3.label"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "t:blocks.age-check.settings.background_img.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overlay",
+      "label": "t:sections.image_banner.settings.show_overlay.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-scrolling-banner.scroll_setting.label"
+    },
+    {
+      "type": "select",
+      "id": "marquee_direction",
+      "label": "t:sections.dbtfy-scrolling-banner.scroll_setting.direction_label",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "t:sections.dbtfy-scrolling-banner.scroll_setting.speed_label",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 10,
+      "unit": "sec"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "t:sections.dbtfy-scrolling-banner.scroll_setting.pause_label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.dbtfy-scrolling-banner.spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:sections.dbtfy-scrolling-banner.spacing.desktop_gap",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "label": "t:sections.dbtfy-scrolling-banner.spacing.mobile_gap",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.color_schemes.header.heading.label",
+      "info": "t:sections.all.color_schemes.header.info.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_schemes.default.label",
+      "options": [
+        {
+          "value": "scheme-1",
+          "label": "t:sections.all.color_schemes.default.options__1.label"
+        },
+        {
+          "value": "scheme-2",
+          "label": "t:sections.all.color_schemes.default.options__2.label"
+        },
+        {
+          "value": "scheme-3",
+          "label": "t:sections.all.color_schemes.default.options__3.label"
+        },
+        {
+          "value": "scheme-4",
+          "label": "t:sections.all.color_schemes.default.options__4.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ],
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "custom_color_scheme",
+      "label": "t:sections.all.color_schemes.custom.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding_section.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding___top",
+      "label": "t:sections.all.padding_section.padding.padding_top",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "padding___bottom",
+      "label": "t:sections.all.padding_section.padding.padding_bottom",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "t:general.settings.size.option__1"
+        },
+        {
+          "value": "none",
+          "label": "t:general.settings.size.option__2"
+        },
+        {
+          "value": "small",
+          "label": "t:general.settings.size.option__3"
+        },
+        {
+          "value": "medium",
+          "label": "t:general.settings.size.option__5"
+        },
+        {
+          "value": "large",
+          "label": "t:general.settings.size.option__6"
+        },
+        {
+          "value": "custom",
+          "label": "t:general.settings.size.option__9"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding_section.custom_padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dbtfy-scrolling-banner.name",
+      "blocks": [
+        {
+          "type": "_heading",
+          "static": true,
+          "id": "heading",
+          "settings": {
+            "padding___top": "none",
+            "padding___bottom": "none"
+          }
+        },
+        {
+          "type": "_dbtfy-scrolling-banner",
+          "static": true,
+          "id": "dbtfy-scrolling-banner",
+          "blocks": [{ "type": "_dbtfy-scrolling-banner_text" }, { "type": "_dbtfy-scrolling-banner_icon" }]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

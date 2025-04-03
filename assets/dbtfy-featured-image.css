@@ -1,0 +1,11 @@
+.dbtfy-featured-image img {
+  object-fit: cover;
+  max-height: 80vh;
+  vertical-align: middle;
+}
+
+@media (max-width: 749px) {
+  .dbtfy-featured-image img {
+    max-height: 60vh;
+  }
+}

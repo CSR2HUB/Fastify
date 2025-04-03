@@ -1,0 +1,69 @@
+{% if request.design_mode %}
+  <style>
+    block-activation-info {
+      display: block;
+      background-color: #f8d7da;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+      text-align: center;
+    }
+  </style>
+  <block-activation-info></block-activation-info>
+{% endif %}
+
+{% content_for 'block', type: '_dbtfy-help-center', id: 'widget-help-center' %}
+{% content_for 'block', type: '_dbtfy-scroll-bar', id: 'widget-scroll-bar' %}
+{% content_for 'block', type: '_dbtfy-cart-favicon', id: 'widget-cart-favicon' %}
+{% content_for 'block', type: '_dbtfy-back-to-top', id: 'widget-back-to-top' %}
+{% content_for 'block', type: '_dbtfy-cart-notification', id: 'widget-cart-notification' %}
+{% content_for 'block', type: '_dbtfy-cart-reminder', id: 'widget-cart-reminder' %}
+{% content_for 'block', type: '_dbtfy-cookie-box', id: 'widget-cookie-box' %}
+{% content_for 'block', type: '_dbtfy-inactive-tab-message', id: 'widget-inactive-tab-message' %}
+{% content_for 'block', type: '_dbtfy-page-transition', id: 'widget-page-transition' %}
+
+{% content_for 'block', type: '_dbtfy-sticky-add-to-cart', id: 'widget-sticky-add-to-cart' %}
+{% content_for 'block', type: '_dbtfy-newsletter-popup', id: 'widget-newsletter-popup' %}
+{% content_for 'block', type: '_dbtfy-age-check', id: 'widget-age-check' %}
+{% content_for 'block', type: '_dbtfy-shop-protect', id: 'widget-shop-protect' %}
+{% content_for 'block', type: '_dbtfy-sales-popup', id: 'widget-sales-popup' %}
+
+{% content_for 'block', type: '_dbtfy-upsell-popup', id: 'widget-upsell-popup' %}
+{% content_for 'block', type: '_dbtfy-customizable-products', id: 'widget-customizable-products' %}
+{% content_for 'block', type: '_dbtfy-back-in-stock', id: 'widget-back-in-stock' %}
+{% content_for 'block', type: '_dbtfy-product-bullet-points', id: 'widget-product-bullet-points' %}
+{% content_for 'block', type: '_dbtfy-product-tabs', id: 'widget-product-tabs' %}
+{% content_for 'block', type: '_dbtfy-quantity-breaks', id: 'widget-quantity-breaks' %}
+{% content_for 'block', type: '_dbtfy-upsell-bundles', id: 'widget-upsell-bundles' %}
+{% content_for 'block', type: '_dbtfy-infinite-scroll', id: 'widget-infinite-scroll' %}
+{% content_for 'block', type: '_dbtfy-trust-badge', id: 'widget-trust-badge' %}
+{% content_for 'block', type: '_cart-upsells', id: 'widget-cart-upsells' %}
+{% content_for 'block', type: '_cart-timer-group', id: 'widget-cart-timer' %}
+{% content_for 'block', type: '_external-urls-handler', id: 'external-urls-handler' %}
+
+{% content_for 'blocks' %}
+
+{% schema %}
+{
+  "name": "t:sections.dbtfy_widgets.name",
+  "class": "details",
+  "limit": 1,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "blocks": [{ "type": "@theme" }, { "type": "_dbtfy-variant-swatches" }],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.widget-notice.header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.widget-notice.label"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.widget-notice.link"
+    }
+  ]
+}
+{% endschema %}
