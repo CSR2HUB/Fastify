@@ -1,0 +1,9 @@
+# Theme Lock File
+theme_name: Fastify
+version: 1.0.0
+build: 2025-04-03
+maintained_by: DOTZ HUB Team
+source: https://github.com/CSR2HUB/Fastify
+notes: |
+  This theme version is optimized, nullified, and secured.
+  Use this lock file to identify production deployments.
