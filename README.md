@@ -94,5 +94,5 @@ Maintained by: [CSR2HUB](https://github.com/CSR2HUB)
 
 ## 🧑‍💻 Credits
 
-Built and maintained with ❤️ by the **CSR2HUB Team**.  
+Built and maintained with ❤️ by the **DOTZ HUB Team**.
 For support or custom development, [open an issue](https://github.com/CSR2HUB/Fastify/issues).
