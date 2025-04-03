@@ -88,11 +88,12 @@ shopify theme push --store your-store.myshopify.com
 
 **Fastify v1.0**  
 Release Date: 2025-04-03  
-Maintained by: [CSR2HUB](https://github.com/CSR2HUB)
+Maintained by: [DOTZ HUB](https://github.com/CSR2HUB)
 
 ---
 
 ## 🧑‍💻 Credits
 
 Built and maintained with ❤️ by the **DOTZ HUB Team**.
+
 For support or custom development, [open an issue](https://github.com/CSR2HUB/Fastify/issues).
